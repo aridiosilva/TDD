@@ -19,9 +19,9 @@ Test-Driven Development Technique
    - “refactor” the code until it conforms to the simplicity criteria 
    - repeat, “accumulating” unit tests over time
    
-   - Test-Driven Development starts with designing and developing tests for every small functionality of an application. 
-   - TDD instructs developers to write new code only if an automated test has failed. 
-   - The simple concept of TDD is to write and correct the failed tests before writing new code (before development).
+- Test-Driven Development starts with designing and developing tests for every small functionality of an application. 
+- TDD instructs developers to write new code only if an automated test has failed. 
+- The simple concept of TDD is to write and correct the failed tests before writing new code (before development).
  
 ## Expected Benefits of TDD
 
