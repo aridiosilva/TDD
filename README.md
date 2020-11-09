@@ -50,7 +50,7 @@ For effective testing, we must use both - Positive and Negative testing - which 
    - Boundary Value Analysis
    - Equivalence Partitioning
    
- ### Boundary Value Analysis (BVA) or Value Limits (in Black Box Testing)
+ ### TECHNIQUE I - Boundary Value Analysis (BVA) or Value Limits (in Black Box Testing)
  
 - Is one of the software testing technique in which the test cases are designed to include values at the boundary. 
 - If the input data is used within the boundary value limits, then it is said to be Positive Testing. 
@@ -63,7 +63,7 @@ For effective testing, we must use both - Positive and Negative testing - which 
 ![EX01](https://github.com/aridiosilva/TDD/blob/main/Example_of_Positive_Negative_Testing_and_Boundary_Value%20Limits_AridioSilva.jpg)
 
 
-### Equivalence Partitioning:
+### TECHNIQUE II - Equivalence Partitioning ou Equivalence Classes (in Black Box Testing)
 
 - Is a software testing technique which divides the input data into many partitions.
 - Values from each partition must be tested at least once. Partitions with valid values are used for Positive Testing. 
