@@ -70,4 +70,6 @@ For effective testing, we must use both - Positive and Negative testing - which 
 - Values from each partition must be tested at least once. Partitions with valid values are used for Positive Testing. 
 - While partitions with invalid values are used for negative testing.
 
+- In Equivalence partitioning, the test data are segregated into various partitions. These partitions are referred to as equivalence data classes. It is assumed that the various input data (data can be a condition) in each partition behave the same way. Hence only one particular condition or situation needs to be tested from each partition as if one works then all the others in that partition is assumed to work. Similarly, if one condition in a partition doesn’t work, then none of the others will work.  
+- Therefore it’s now very apparent that valid data classes (in the partitions) will comprise of positive testing whereas invalid data classes will comprise of negative testing.
 
