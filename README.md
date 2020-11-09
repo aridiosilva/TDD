@@ -44,6 +44,31 @@ By 2006 TDD is a relatively mature discipline which has started encouraging furt
 - the same teams tend to report that these overheads are more than offset by a reduction in effort in projects’ final phases
 - although empirical research has so far failed to confirm this, veteran practitioners report that TDD leads to improved design qualities in the code, and more generally a higher degree of “internal” or technical quality, for instance improving the metrics of cohesion and coupling
 
+## Signs of Use of TDD
+
+- “code coverage” is a common approach to evidencing the use of TDD; while high coverage does not guarantee appropriate use of TDD, coverage below 80% is likely to indicate  deficiencies in a team’s mastery of TDD
+- version control logs should show that test code is checked in each time product code is checked in, in roughly comparable amounts
+
+
+## Skill Levels for TDD Use
+
+  ### Beginner
+
+   - able to write a unit test prior to writing the corresponding code
+   -  able to write code sufficient to make a failing test pass
+
+  ### Intermediate
+
+   - practices “test driven bug fixing”: when a defect is found, writes a test exposing the defect before correction
+   - able to decompose a compound program feature into a sequence of several unit tests to be written
+   - knows and can name a number of tactics to guide the writing of tests (for instance “when testing a recursive algorithm, first write a test for the recursion terminating case”)
+   - able to factor out reusable elements from existing unit tests, yielding situation-specific testing tools
+
+  ### Advanced
+
+   - able to formulate a “roadmap” of planned unit tests for a macroscopic features (and to revise it as necessary)
+   - able to “test drive” a variety of design paradigms: object-oriented, functional, event-drive
+   - able to “test drive” a variety of technical domains: computation, user interfaces, persistent data access…
 
 ## Positive and Negative Unit Test Cases
 
