@@ -14,7 +14,9 @@ For effective testing, we must use both - Positive and Negative testing - which 
 - Positive Testing is a type of testing which is performed on a software application by providing the VALID DATA sets as an input. 
 - It checks whether the software application behaves as expected with POSITIVO INPUTS or not. 
 - Positive testing is performed in order to check whether the software application does exactly what it is expected to do.
+
 - Positive testing, many times referred to as **“Happy path testing”** is generally the first form of testing that a tester would perform on an application. 
+
 - It is the process of running test scenarios that an end user would run for his use. Hence as implied, positive testing entails running a test scenario with only correct and valid data. If a test scenario doesn’t need data, then positive testing would require running the test exactly the manner in which it’s supposed to run and hence to ensure that the application is meeting the specifications. 
 - Sometimes there may be more than one way of performing a particular function or task with an intent to give the end user more flexibility or for general product consistency. This is called **alternate path testing** which is also a kind of positive testing. In alternate path testing, the test is again performed to meet its requirements but using the different route than the obvious path. The test scenario would even consume the same kind of data to achieve the same result.
 
@@ -26,6 +28,14 @@ For effective testing, we must use both - Positive and Negative testing - which 
 - It checks whether the software application behaves as expected with the negative or unwanted user inputs. 
 - The purpose of negative testing is to ensure that the software application does not crash and remains stable with invalid data inputs.
 - Either software system should not accept the values or else it should throw an error message for these invalid data inputs.
+
+- Negative testing commonly referred to as **error path testing** or **failure testing** is generally done to ensure the stability of the application.
+
+- Negative testing is the process of applying as much creativity as possible and validating the application against invalid data. This means its intended purpose is to check if the errors are being shown to the user where it’s supposed to, or handling a bad value more gracefully.
+- It is absolutely essential to understand why negative testing is necessary.
+- The application or software’s functional reliability can be quantified only with effectively designed negative scenarios. 
+- Negative testing not only aims to bring out any potential flaws that could cause serious impact on the consumption of the product on the whole but can be instrumental in determining the conditions under which the application can crash. 
+- Finally, it ensures that there is sufficient error validation present in the software.
 
 ![NPS](https://github.com/aridiosilva/TDD/blob/main/Negative_testing_AridioSilva.jpg)
 
