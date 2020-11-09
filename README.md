@@ -28,7 +28,7 @@ Test-Driven Development Technique
 
 - In both the testing, the following needs to be considered:  Input data,  An action which needs to be performed  and Output Result;
 
-## Testing Technique used for Positive and Negative Testing
+## Testing Techniques used for Positive and Negative Testing
 
 - Following techniques are used for Positive and negative validation of testing is:
 
