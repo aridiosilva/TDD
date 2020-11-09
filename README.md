@@ -18,6 +18,12 @@ Test-Driven Development Technique
    - write “just enough” code, the simplest possible, to make the test pass
    - “refactor” the code until it conforms to the simplicity criteria 
    - repeat, “accumulating” unit tests over time
+ 
+## Expected Benefits of TDD
+
+- many teams report significant reductions in defect rates, at the cost of a moderate increase in initial development effort
+- the same teams tend to report that these overheads are more than offset by a reduction in effort in projects’ final phases
+- although empirical research has so far failed to confirm this, veteran practitioners report that TDD leads to improved design qualities in the code, and more generally a higher degree of “internal” or technical quality, for instance improving the metrics of cohesion and coupling
 
 
 ## Positive and Negative Unit Test Cases
