@@ -41,5 +41,5 @@ Test-Driven Development Technique
 - If the input data is used within the boundary value limits, then it is said to be Positive Testing. 
 - If the input data is picked outside the boundary value limits, then it is said to be Negative Testing.
 
-![BoundaryValueAnalysis]<https://github.com/aridiosilva/TDD/blob/main/Negative_PositiveTesting-Valid_nvalid_Input-Boundary_or_LimitValues_AridioSilva.jpg>
+![BoundaryValueAnalysis]<https://github.com/aridiosilva/TDD/blob/main/Negative_PositiveTesting-Valid_Invalid_Input-Boundary_or_LimitValues_AridioSilva.jpg>
 
