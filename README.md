@@ -52,19 +52,19 @@ By 2006 TDD is a relatively mature discipline which has started encouraging furt
 
 ## Skill Levels for TDD Use
 
-  ### Beginner
+  ### a) Level Beginner
 
    - able to write a unit test prior to writing the corresponding code
    -  able to write code sufficient to make a failing test pass
 
-  ### Intermediate
+  ### b) Level Intermediate
 
    - practices “test driven bug fixing”: when a defect is found, writes a test exposing the defect before correction
    - able to decompose a compound program feature into a sequence of several unit tests to be written
    - knows and can name a number of tactics to guide the writing of tests (for instance “when testing a recursive algorithm, first write a test for the recursion terminating case”)
    - able to factor out reusable elements from existing unit tests, yielding situation-specific testing tools
 
-  ### Advanced
+  ### c) Level Advanced
 
    - able to formulate a “roadmap” of planned unit tests for a macroscopic features (and to revise it as necessary)
    - able to “test drive” a variety of design paradigms: object-oriented, functional, event-drive
