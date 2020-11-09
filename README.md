@@ -22,6 +22,21 @@ Test-Driven Development Technique
 - Test-Driven Development starts with designing and developing tests for every small functionality of an application. 
 - TDD instructs developers to write new code only if an automated test has failed. 
 - The simple concept of TDD is to write and correct the failed tests before writing new code (before development).
+
+## Origins of TDD
+
+While the idea of having test elaboration precede programming is not original to the Agile community, TDD constitutes a breakthrough insofar as it combines that idea with that of “developer testing”, providing developer testing with renewed respectability.
+
+1976: publication of “Software Reliability” by Glenford Myers, which states as an “axiom” that “a developer should never test their own code” (Dark Ages of Developer Testing)
+1990: testing discipline dominated by “black box” techniques, in particular in the form of “capture and replay” testing tools
+1991: independent creation of a testing framework at Taligent with striking similarities to SUnit (source)
+1994: Kent Beck writes the SUnit testing framework for Smalltalk (source)
+1998: article on Extreme Programming mentions that “we usually write the test first” (source)
+1998 to 2002: “Test First” is elaborated into “Test Driven”, in particular on the C2.com Wiki
+2000: Mock Objects are among the novel techniques developed during that period (source)
+2003: publication of “Test Driven Development: By Example” by Kent Beck
+
+By 2006 TDD is a relatively mature discipline which has started encouraging further innovations derived from it, such as ATDD or BDD).
  
 ## Expected Benefits of TDD
 
