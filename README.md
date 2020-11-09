@@ -61,7 +61,7 @@ For effective testing, we must use both - Positive and Negative testing - which 
 ![EX01](https://github.com/aridiosilva/TDD/blob/main/Example_of_Positive_Negative_Testing_and_Boundary_Value%20Limits_AridioSilva.jpg)
 
 
-### TECHNIQUE II - Equivalence Partitioning ou Equivalence Classes (in Black Box Testing)
+### TECHNIQUE II - Equivalence Class Partitioning (ECP) or Equivalence Classes (in Black Box Testing)
 
 - Is a software testing technique which divides the input data into many partitions.
 - Values from each partition must be tested at least once. Partitions with valid values are used for Positive Testing. 
