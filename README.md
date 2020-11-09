@@ -7,6 +7,8 @@ Test-Driven Development Technique
 
 ## Positive and Negative Unit Test Cases
 
+For effective testing, we must use both - Positive and Negative testing - which give enough confidence in the quality of the software. 
+
 ### What is Positive Testing ?
 
 - Positive Testing is a type of testing which is performed on a software application by providing the VALID DATA sets as an input. 
@@ -50,4 +52,4 @@ Test-Driven Development Technique
 
 ### Equivalence Partitioning:
 
-This is a software testing technique which divides the input data into many partitions. Values from each partition must be tested at least once. Partitions with valid values are used for Positive Testing. While partitions with invalid values are used for negative testing.
+Is a software testing technique which divides the input data into many partitions. Values from each partition must be tested at least once. Partitions with valid values are used for Positive Testing. While partitions with invalid values are used for negative testing.
