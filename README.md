@@ -18,6 +18,9 @@
    - “refactor” the code until it conforms to the simplicity criteria 
    - repeat, “accumulating” unit tests over time
    
+   ![TDD Workflow](https://github.com/aridiosilva/TDD/blob/main/TDD-Workflow.png)   
+   
+   
 - Test-Driven Development starts with designing and developing tests for every small functionality of an application. 
 - TDD instructs developers to write new code only if an automated test has failed. 
 - The simple concept of TDD is to write and correct the failed tests before writing new code (before development).
