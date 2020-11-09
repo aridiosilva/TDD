@@ -14,9 +14,9 @@ For effective testing, we must use both - Positive and Negative testing - which 
 - Positive Testing is a type of testing which is performed on a software application by providing the VALID DATA sets as an input. 
 - It checks whether the software application behaves as expected with POSITIVO INPUTS or not. 
 - Positive testing is performed in order to check whether the software application does exactly what it is expected to do.
-- Positive testing, many times referred to as “Happy path testing” is generally the first form of testing that a tester would perform on an application. 
+- Positive testing, many times referred to as **“Happy path testing”** is generally the first form of testing that a tester would perform on an application. 
 - It is the process of running test scenarios that an end user would run for his use. Hence as implied, positive testing entails running a test scenario with only correct and valid data. If a test scenario doesn’t need data, then positive testing would require running the test exactly the manner in which it’s supposed to run and hence to ensure that the application is meeting the specifications. 
-- Sometimes there may be more than one way of performing a particular function or task with an intent to give the end user more flexibility or for general product consistency. This is called alternate path testing which is also a kind of positive testing. In alternate path testing, the test is again performed to meet its requirements but using the different route than the obvious path. The test scenario would even consume the same kind of data to achieve the same result.
+- Sometimes there may be more than one way of performing a particular function or task with an intent to give the end user more flexibility or for general product consistency. This is called **alternate path testing** which is also a kind of positive testing. In alternate path testing, the test is again performed to meet its requirements but using the different route than the obvious path. The test scenario would even consume the same kind of data to achieve the same result.
 
 ![PTS](https://github.com/aridiosilva/TDD/blob/main/Positive_testing_AridioSilva.jpg)
 
