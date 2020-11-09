@@ -1,5 +1,4 @@
-# TDD
-Test-Driven Development Technique
+# TDD  - Test-Driven Development Technique
 
 ## What is TDD ?
 
