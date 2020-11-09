@@ -24,10 +24,7 @@ For effective testing, we must use both - Positive and Negative testing - which 
 
 ### What is Negative Testing ?
 
-- Negative Testing is a testing method performed on the software application by providing invalid or improper data sets as input. 
-- It checks whether the software application behaves as expected with the negative or unwanted user inputs. 
-- The purpose of negative testing is to ensure that the software application does not crash and remains stable with invalid data inputs.
-- Either software system should not accept the values or else it should throw an error message for these invalid data inputs.
+- Negative Testing is a testing method performed on the software application by providing invalid or improper data sets as input. It checks whether the software application behaves as expected with the negative or unwanted user inputs. The purpose of negative testing is to ensure that the software application does not crash and remains stable with invalid data inputs. Either software system should not accept the values or else it should throw an error message for these invalid data inputs.
 
 - Negative testing commonly referred to as **error path testing** or **failure testing** is generally done to ensure the stability of the application.
 
