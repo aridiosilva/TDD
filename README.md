@@ -13,7 +13,7 @@ Test-Driven Development Technique
 - It checks whether the software application behaves as expected with POSITIVO INPUTS or not. 
 - Positive testing is performed in order to check whether the software application does exactly what it is expected to do.
 
-![Positive Testing Scope]<https://github.com/aridiosilva/TDD/blob/main/Positive_testing_AridioSilva.jpg>
+![PositiveTestingScope]<https://github.com/aridiosilva/TDD/blob/main/Positive_testing_AridioSilva.jpg>
 
 ### What is Negative Testing ?
 
@@ -22,7 +22,7 @@ Test-Driven Development Technique
 - The purpose of negative testing is to ensure that the software application does not crash and remains stable with invalid data inputs.
 - Either software system should not accept the values or else it should throw an error message for these invalid data inputs.
 
-![Negative Testing Scope]<https://github.com/aridiosilva/TDD/blob/main/Negative_testing_AridioSilva.jpg>
+![NegativeTestingScope]<https://github.com/aridiosilva/TDD/blob/main/Negative_testing_AridioSilva.jpg>
 
 ### What Should Be Considered in Positive and Negative Testing ?
 
@@ -41,5 +41,5 @@ Test-Driven Development Technique
 - If the input data is used within the boundary value limits, then it is said to be Positive Testing. 
 - If the input data is picked outside the boundary value limits, then it is said to be Negative Testing.
 
-!{Boundary Value Analysis]<https://github.com/aridiosilva/TDD/blob/main/Negativ_%26_PositiveTesting-Valid_%26_%20Invalid_Input-Boundary_or_LimitValues_AridioSilva.jpg>
+![BoundaryValueAnalysis]<https://github.com/aridiosilva/TDD/blob/main/Negativ_%26_PositiveTesting-Valid_%26_%20Invalid_Input-Boundary_or_LimitValues_AridioSilva.jpg>
 
