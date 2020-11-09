@@ -35,7 +35,7 @@ Test-Driven Development Technique
    - Boundary Value Analysis
    - Equivalence Partitioning
    
- ### Boundary Value Analysis
+ ### Boundary Value Analysis or Value Limits (in Black Box Testing)
  
 - Is one of the software testing technique in which the test cases are designed to include values at the boundary. 
 - If the input data is used within the boundary value limits, then it is said to be Positive Testing. 
@@ -43,3 +43,4 @@ Test-Driven Development Technique
 
 ![BVA](https://github.com/aridiosilva/TDD/blob/main/Negative_PositiveTesting-Valid_Invalid_Input-Boundary_or_LimitValues_AridioSilva.jpg)
 
+-  For instace, a system can accept the numbers from 0 to 100 numeric values. All other numbers are invalid values. Under this technique, boundary values -1,0,1 and 90,100,101 will be tested.
