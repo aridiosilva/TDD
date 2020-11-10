@@ -197,3 +197,29 @@ Codewars is a community of developers, who are called Code Warriors (or just war
 - In the Codewars (Kata Testing Framewoek), kata are code challenges focused on improving skill and technique. Some train programming fundamentals, while others focus on complex problem solving. Others are puzzles meant to test your creative problem solving, while others are based on real world coding scenarios.
 Each kata is crafted for and by the community. The author (or Sensei) who created kata will initially include one or more languages to train in. Other Code Warriors later can "translate" the kata into additional languages.
 
+## Unit Testing 
+
+### Basics of Unit testing
+
+Check that your code is working as expected by creating and running unit tests. It's called unit testing because you break down the functionality of your program into discrete testable behaviors that you can test as individual units. 
+
+Use a unit testing framework to create unit tests, run them, and report the results of these tests. Rerun unit tests when you make changes to test that your code is still working correctly.
+
+Unit testing has the greatest effect on the quality of your code when it's an integral part of your software development workflow. 
+
+With test driven development, you create the unit tests before you write the code, so you use the unit tests as both design documentation and functional specifications.
+
+##  AAA (Arrange-Act-Assert) Unit Testing Pattern - Writing your Unit Tests
+
+The unit test framework that you use and Visual Studio IntelliSense will guide you through writing the code for your unit tests for a code project. To run in Test Explorer, most frameworks require that you add specific attributes to identify unit test methods. The frameworks also provide a way—usually through assert statements or method attributes—to indicate whether the test method has passed or failed. Other attributes identify optional setup methods that are at class initialization and before each test method and teardown methods that are run after each test method and before the class is destroyed.
+
+The AAA (Arrange, Act, Assert) pattern is a common way of writing unit tests for a method under test.
+
+    -  The Arrange section of a unit test method initializes objects and sets the value of the data that is passed to the method under test.
+
+    - The Act section invokes the method under test with the arranged parameters.
+
+    - The Assert section verifies that the action of the method under test behaves as expected.
+
+To test the CheckingAccount.Withdraw method of our example, we can write two tests: one that verifies the standard behavior of the method, and one that verifies that a withdrawal of more than the balance will fail. In the CheckingAccountTests class, we add the following methods:
+
