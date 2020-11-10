@@ -156,7 +156,7 @@ The biggest challenge with writing tests for unhappy paths is identifying them. 
 
 ## TDD Code Kata 
 
-How to Level Up Your Test-Driven Development expertise?
+How to Level Up Your Test-Driven Development expertise?  A kata is a small programming task that you build a solution to, or sometimes multiple solutions. The point is to develop programming skill through familiarity with programming patterns. The question is, are code katas useful for testers? 
 
 ### What is Kata?
 
