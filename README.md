@@ -139,6 +139,8 @@ For effective testing, we must use both - Positive and Negative testing - which 
 
 ## Happy & Unhappy Paths: Why You Need to Test Both
 
+  - A happy path is a default scenario featuring no exceptional or error conditions, so the unhappy path is all the other scenarios where exceptional or error conditions happen.
+
 Congratulations! You’ve finally launched a web application after months of development. As an Agile developer, you used test-driven development from the start and achieved nearly 100% test coverage. And any new commits go through a robust continuous integration and delivery process to instantly identify issues before they hit production. What could go wrong? To your surprise, you wake up the next morning to find a mountain of bug reports in your inbox. Angry users are complaining that the software isn’t working properly and the server logs are filled with crashes. Something has gone horribly wrong despite your diligent testing.  What happened? And how can you fix it? Let’s take a look at what likely went wrong and how you can modify your testing approach to ensure that your software is intuitive and error free.  Many developers make assumptions when writing tests and fail to cover the ‘unhappy paths’.
 
 ### Happy vs. Unhappy Paths
