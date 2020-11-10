@@ -176,11 +176,11 @@ How to Level Up Your Test-Driven Development expertise?  A kata is a small progr
 
 - That’s what code katas are for. They’re not tutorials. They’re exercises, designed to help you grow in your technical agility. 
 
-## Where did the term kata Code come from?
+### Where did the term kata Code come from?
 
 The term was first coined by Dave Thomas, co-author of the book The Pragmatic Programmer as an acknowledgment to the Japanese concept of kata in the martial arts. Dave's version of the concept defines a code kata as an exercise in programming which helps a programmer sharpen their skills through practice and repetition
 
-## Kata Testing Famework  (CodeWars)
+### Kata Testing Famework  (CodeWars)
 
 Codewars is a community of developers, who are called Code Warriors (or just warriors), that train on improving their development skills. Think of it like a coding dojo - where developers train with each other and help each other get better through practice.
 
