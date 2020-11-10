@@ -170,7 +170,7 @@ The biggest challenge with writing tests for unhappy paths is identifying them. 
 
 - Using self-contained exercises is the best way to practice coding. They’re outside of your production code, so there’s no worry of breaking anything. You’ll throw away what you try because you’re going to repeat the coding kata later. The goal is to gain mastery over coding tools and techniques.
 
-- How can you learn and practice test-driven development (TDD)? I can explain the principles of TDD. But the question that comes back is, “But what do I actually do in Xcode?”
+- How can you learn and practice test-driven development (TDD)? I can explain the principles of TDD. But the question that comes back is, “But what do I actually do in my framework of software development?”
 
 - That’s what code katas are for. They’re not tutorials. They’re exercises, designed to help you grow in your technical agility. 
 
