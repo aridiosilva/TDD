@@ -168,5 +168,9 @@ The biggest challenge with writing tests for unhappy paths is identifying them. 
 
 - Then you can tackle the same problem but with different approaches. A common style during the annual Global Day of Coderetreat is to repeat a problem while adding different coding constraints. For example, can you code without your mouse? Can you code without exposing properties? How about no conditionals? …A physical analogy would be running with extra weights, or fighting with one hand.
 
-- ing self-contained exercises like this is the best way to practice coding. They’re outside of your production code, so there’s no worry of breaking anything. You’ll throw away what you try because you’re going to repeat the coding kata later. The goal is to gain mastery over coding tools and techniques.
+- Using self-contained exercises is the best way to practice coding. They’re outside of your production code, so there’s no worry of breaking anything. You’ll throw away what you try because you’re going to repeat the coding kata later. The goal is to gain mastery over coding tools and techniques.
+
+- How can you learn and practice test-driven development (TDD)? I can explain the principles of TDD. But the question that comes back is, “But what do I actually do in Xcode?”
+
+- That’s what code katas are for. They’re not tutorials. They’re exercises, designed to help you grow in your technical agility. 
 
