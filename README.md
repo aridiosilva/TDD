@@ -211,8 +211,6 @@ With test driven development, you create the unit tests before you write the cod
 
 ##  AAA (Arrange-Act-Assert) Unit Testing Pattern - Writing your Unit Tests
 
-The unit test framework that you use and Visual Studio IntelliSense will guide you through writing the code for your unit tests for a code project. To run in Test Explorer, most frameworks require that you add specific attributes to identify unit test methods. The frameworks also provide a way—usually through assert statements or method attributes—to indicate whether the test method has passed or failed. Other attributes identify optional setup methods that are at class initialization and before each test method and teardown methods that are run after each test method and before the class is destroyed.
-
 The AAA (Arrange, Act, Assert) pattern is a common way of writing unit tests for a method under test.
 
     -  The Arrange section of a unit test method initializes objects and sets
@@ -222,7 +220,13 @@ The AAA (Arrange, Act, Assert) pattern is a common way of writing unit tests for
 
     - The Assert section verifies that the action of the method under test behaves as expected.
 
+The AAA (Arrange-Act-Assert) pattern has become almost a standard across the industry. It suggests that you should divide your test method into three sections: arrange, act and assert. Each one of them only responsible for the part in which they are named after.
+
+So the arrange section you only have code required to setup that specific test. Here objects would be created, mocks setup (if you are using one) and potentially expectations would be set. Then there is the Act, which should be the invocation of the method being tested. And on Assert you would simply check whether the expectations were met. 
+
 ## Example in Java of the use of AAA Unit Testing Patterning
+
+Following this pattern does make the code quite well structured and easy to understand. In general lines, it would look like this:
 
      // arrange
      var repository = Substitute.For<IClientRepository>();
