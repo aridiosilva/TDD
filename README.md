@@ -186,3 +186,6 @@ Codewars is a community of developers, who are called Code Warriors (or just war
 
 (https://github.com/codewars/codewars.com/wiki/About-Codewars)
 
+- In the Codewars (Kata Testing Framewoek), kata are code challenges focused on improving skill and technique. Some train programming fundamentals, while others focus on complex problem solving. Others are puzzles meant to test your creative problem solving, while others are based on real world coding scenarios.
+Each kata is crafted for and by the community. The author (or Sensei) who created kata will initially include one or more languages to train in. Other Code Warriors later can "translate" the kata into additional languages.
+
