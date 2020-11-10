@@ -153,3 +153,20 @@ Happy and unhappy paths can be useful in both behavior-driven development (BDD) 
 ### How to Find Unhappy Paths
 
 The biggest challenge with writing tests for unhappy paths is identifying them. When we write software, we create an intended workflow for the user, but there are countless ways that they can deviate from that workflow. 
+
+## TD Code Kata
+
+### What is Kata?
+
+- “Kata” is a Japanese martial arts term for choreographed patterns of movement. They’re also called “forms.” Both beginners and masters practice these detailed patterns over and over. The movements eventually come without thought, because your body knows what to do.
+
+### What is Code Kata?
+
+- How do professional athletes stay on top of their game? They practice. How about professional musicians? Practice, practice, practice.
+
+- A “code kata” applies this idea to coding. It’s a self-contained exercise you can repeat. Every time you repeat it, you’ll learn something new. At first, you’ll learn one approach to solving a problem. As you repeat the same approach, your learning will shift toward muscle memory.
+
+- Then you can tackle the same problem but with different approaches. A common style during the annual Global Day of Coderetreat is to repeat a problem while adding different coding constraints. For example, can you code without your mouse? Can you code without exposing properties? How about no conditionals? …A physical analogy would be running with extra weights, or fighting with one hand.
+
+- ing self-contained exercises like this is the best way to practice coding. They’re outside of your production code, so there’s no worry of breaking anything. You’ll throw away what you try because you’re going to repeat the coding kata later. The goal is to gain mastery over coding tools and techniques.
+
