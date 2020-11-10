@@ -221,5 +221,15 @@ The AAA (Arrange, Act, Assert) pattern is a common way of writing unit tests for
 
     - The Assert section verifies that the action of the method under test behaves as expected.
 
-To test the CheckingAccount.Withdraw method of our example, we can write two tests: one that verifies the standard behavior of the method, and one that verifies that a withdrawal of more than the balance will fail. In the CheckingAccountTests class, we add the following methods:
+## Example in Java of the use of AAA Unit Testing Patterning
+
+     // arrange
+     var repository = Substitute.For<IClientRepository>();
+     var client = new Client(repository);
+     // act
+     client.Save();
+     // assert
+     mock.Received.SomeMethod();
+
+
 
