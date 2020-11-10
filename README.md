@@ -154,7 +154,7 @@ Happy and unhappy paths can be useful in both behavior-driven development (BDD) 
 
 The biggest challenge with writing tests for unhappy paths is identifying them. When we write software, we create an intended workflow for the user, but there are countless ways that they can deviate from that workflow. 
 
-## TD Code Kata
+## TDD Code Kata
 
 ### What is Kata?
 
