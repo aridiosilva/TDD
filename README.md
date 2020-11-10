@@ -227,14 +227,19 @@ So the arrange section you only have code required to setup that specific test. 
 ## Example in Java of the use of AAA Unit Testing Patterning
 
 Following this pattern does make the code quite well structured and easy to understand. In general lines, it would look like this:
-
-     // arrange
-     var repository = Substitute.For<IClientRepository>();
-     var client = new Client(repository);
-     // act
-     client.Save();
-     // assert
-     mock.Received.SomeMethod();
+    
+     [TestClass]
+     public class TestaCalc {
+        [TestMethod]
+         public void TesteSoma()  {
+            //arrange:
+            var calculadora = new Calculadora();
+            //act:
+            var resultado = calculadora.Somar(2, 3);
+            //assert:
+            Assert.AreEqual(5, resultado);
+        }
+     }
 
 
 
