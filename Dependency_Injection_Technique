@@ -38,3 +38,87 @@ The injector is the only role that isn’t required by the dependency inversion 
 
 As you can see, dependency injection is a great fit for applications that follow the dependency inversion principle. 
 You already implement most of the required roles, and the dependency injection technique enables you to remove the last dependency to the service implementation.
+
+## Is Dependency Injection Good or Bad?
+
+Dependency Injection is only a good idea when a consuming object has a dependency which can be switched at 
+runtime between a number of alternatives, and where the choice of which alternative to use can be made
+outside of the consuming object and then injected into it.
+
+## When to use Dependency Injection
+
+Dependency injection is a powerful technique that can be applied in many situations across all layers of an application. But this does not mean that dependency injection should be used every time a class depends on another class.
+
+In short dependency injection is very effective at assembling loosely coupled components, and at configuring these components. Especially if the association between the components lasts throughout the lifetime of the components.
+
+More specifically, dependency injection is effective in these situations:
+
+   - You need to inject configuration data into one or more components.
+   - You need to inject the same dependency into multiple components.
+   - You need to inject different implementations of the same dependency.
+   - You need to inject the same implementation in different configurations.
+   - You need some of the services provided by the container.
+
+These situations have one thing in common. They often signal that the components wired together represent different or independent concepts or responsibilities, or belong to different abstraction layers in the system. For instance, database configuration (driver, url, user, password) and a DataSource implementation are different concepts. Similarly a DataSource and a DAO class represent different concepts and belong to different abstraction layers. Each of these situations are described in more detail below.
+
+## Dependency Injection Benefits
+  
+There are several benefits from using dependency injection containers rather than having components satisfy their own dependencies. Some of these benefits are:
+
+  - Reduced Dependencies
+  - Reduced Dependency Carrying
+  - More Reusable Code
+  - More Testable Code
+  - More Readable Code
+  - These benefits are explained in more detail below.
+
+### Reduced Dependencies
+
+Dependency injection makes it possible to eliminate, or at least reduce, a components unnecessary dependencies. A component is vulnerable to change in its dependencies. If a dependency changes, the component might have to adapt to these changes. For instance, if a method signature of a dependency is changed, the component will have to change that method call. When a components dependencies are reduced it is less vulnerable to changes.
+
+### More Reusable Code
+
+Reducing a components dependencies typically makes it easier to reuse in a different context. The fact that dependencies can be injected and therefore configured externally, increases the reusability of that component. If a different implementation of some interface is needed in a different context, or just a different configuration of the same implementation, the component can be configured to work with that implementation. There is no need to change the code.
+
+### More Testable Code
+
+Dependency injection also increases a components testability. When dependencies can be injected into a component it is possible to inject mock implementations of these dependencies. Mock objects are used for testing as replacement for a real implementation. The behaviour of the mock object can be configured. That way the component using the mock can be tested to handle all behaviours correctly. For instance, handling both when the mock returns a correct object, when null is returned and when an exception is thrown. In addition mock objects normally record what methods were invoked on them, so the test can verify that the component using the mock, have used them as expected.
+
+### More Readable Code
+
+Dependency injection moves the dependencies to the interface of components. This makes it easier to see what dependencies a component has, making the code more readable. You don't have to look through all the code to see what dependencies you need to satisfy for a given component. They are all visible in the interface.
+
+### Reduced Dependency Carrying
+
+Another nice benefit of dependency injection is that it eliminates what I call "dependency carrying". Dependency carrying is when an object takes a parameter in one of its methods that it doesn't need itself, but is needed by one of the objects it calls to carry out its work. It may sound a bit abstract, so lets take a simple example.
+
+A component A boots an application and creates a configuration object, Config, that is needed by some but not all of the components in the system. Then A calls B, B calls C and C calls D. Neither B or C needs the Config object, but D does. Here is the call chain
+
+### A creates Config
+
+A --> B --> C --> D --> Config
+
+The arrows symbolizes method calls. If A creates B, and B creates C and C creates D and D needs Config, then the Config object needs to be passed all the way from A to B, from B to C and finally from C to D. However, since neither B or C needs Config to do their job, all they do is to "carry" it on to D, which depends on Config. Hence the term "dependency carrying".
+
+If you have worked on any larger system, you hve probably seen dependency carrying a lot. Parameters that are just passed on to lower components.
+
+Dependency carrying creates a lot of "noise" in the code, making it harder to read and maintain. In addition it makes components harder to test. If a method call on a component, A, requires some object, OX, only because a collaborator, CY, needs it, you still need to provide an instance of OX when testing the A's method, even if A doesn't use it. Even if you use a mock implementation of the collaborator CY which may not even use the object OX. You might get away with passing null for OX, if there is no non-null validation going on in the tested method. Sometimes it may even be difficult to instantiate this object OX during the test. If the constructor of OX depends on a lot of other objects or values, your test will have to provide meaningful objects/values for these parameters too. And, if OX depends on OY which depends on OZ, it gets really crazy.
+
+When call stacks are deep dependency carrying is a real pain. Especially if you find out a component at the bottom of the call stack needs another object available further up the call stack. Then you will have to add that object as parameter to all the method calls down the call stack, from where the needed object is available, to where it is needed.
+
+A common solution to dependency carrying is to make the needed objects static singletons. That way any component in the system can access the singleton directly through its static factory method. Unfortunately static singletons come with a whole bag of other problems, which I won't get into here. Static singletons are evil. Don't use them if you can avoid it.
+
+When you use a dependency injection container you can reduce dependency carrying and the use of static singletons. The container knows about all components in the application. Therefore it can wire the components together perfectly, without having to pass any dependencies through one component to another. The example with the components A, B, C, D and Config would have looked like this with a container:
+
+  Container creates Config
+  container creates D and injects Config
+  Container creates C and injects D
+  Container creates B and injects C
+  Container creates A and injects B
+
+  A --> B --> C --> D --> Config
+
+When A calls B it doesn't have to pass the Config object along to B. D already knows the Config object.
+
+There might still be situations in which you cannot avoid dependency carrying. For instance, if you have an application that processes requests, like a web application or web service, and the components processing the requests are singletons, then the request object may have to be passed down the call chain whenever a lower layered component needs access to it.
+
