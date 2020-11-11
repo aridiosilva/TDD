@@ -31,6 +31,7 @@ You already implement three of these four roles by following the dependency inve
 
 You can skip the interface role and inject the service object directly into the client. But by doing that, you break with the dependency inversion principle and your client has an explicit dependency on the service class. In some situations, this might be ok. But most often, it’s better to introduce an interface to remove the dependency between the client and the service implementation.
 
-The injector is the only role that isn’t required by the dependency inversion principle. But that’s not an issue because you don’t need to implement it. All frameworks that I listed at the beginning of this article provide ready-to-use implementations of it.
+The injector is the only role that isn’t required by the dependency inversion principle. But that’s not an issue because you don’t need to implement it. 
 
-As you can see, dependency injection is a great fit for applications that follow the dependency inversion principle. You already implement most of the required roles, and the dependency injection technique enables you to remove the last dependency to the service implementation.
+As you can see, dependency injection is a great fit for applications that follow the dependency inversion principle. 
+You already implement most of the required roles, and the dependency injection technique enables you to remove the last dependency to the service implementation.
