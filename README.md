@@ -229,16 +229,16 @@ So the arrange section you only have code required to setup that specific test. 
 Following this pattern does make the code quite well structured and easy to understand. In general lines, it would look like this:
 
 ```java
-     [TestClass]
+     import static org.junit.Assert.assertEquals;
      public class TestaCalc {
-        [TestMethod]
-         public void TesteSoma()  {
+        @Test
+         public void AddTest()  {
             //arrange:
-            var calculadora = new Calculadora();
+            var calculator = new Calculator();
             //act:
-            var resultado = calculadora.Somar(2, 3);
+            var result = calculator.addOperands(2, 3);
             //assert:
-            Assert.AreEqual(5, resultado);
+            Assert.AreEqual(5, result);
         }
      }
 
