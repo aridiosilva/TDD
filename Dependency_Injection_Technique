@@ -18,14 +18,14 @@
 - You can introduce interfaces to break the dependencies between higher and lower level classes. 
 - IF you do that, both classes depend on the interface and no longer on each other. 
 
-## Four Roles in Dependency Injection
+## Four Basic Roles in Dependency Injection
 
 To use this technique, you need classes that fulfill four basic roles. These are:
 
-  -  The service you want to use.
-  -  The client that uses the service.
-  -  An interface that’s used by the client and implemented by the service.
-  -  The injector which creates a service instance and injects it into the client.
+  - ROLE 1 - The service you want to use.
+  - ROLE 2 - The client that uses the service.
+  - ROLE 3 - An interface that’s used by the client and implemented by the service.
+  - ROLE 4 - The injector which creates a service instance and injects it into the client.
 
 You already implement three of these four roles by following the dependency inversion principle. The service and the client are the two classes between which the dependency inversion principle intends to remove the dependency by introducing an interface.
 
