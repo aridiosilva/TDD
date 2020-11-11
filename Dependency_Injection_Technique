@@ -1,4 +1,7 @@
-# Dependency Injection Technique
+# Dependency Injection Pattern
+
+Dependency Injection (DI) is a pattern that can help developers decouple the different pieces of their applications. 
+It provides a mechanism for the construction of dependency graphs independent of the class definitions. 
 
 ## What is Dependency Injection?
 
