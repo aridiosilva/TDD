@@ -1,0 +1,21 @@
+# Dependency Injection Technique
+
+## What is Dependency Injection?
+
+- Dependency injection is a programming technique that makes a class independent of its dependencies. 
+- It achieves that by decoupling the usage of an object from its creation.
+- This helps you to follow SOLID’s dependency inversion and single responsibility principles.
+- The dependency injection technique is a popular alternative to the service locator pattern. 
+- A lot of modern application frameworks implement it. These frameworks provide the technical parts of the technique so that you can focus on the implementation of your business logic. 
+
+## What is the Goal of Dependency Injection?
+
+- The goal of the dependency injection technique is to remove this dependency by separating the usage from the creation of the object. 
+- This reduces the amount of required boilerplate code and improves flexibility.
+
+## The Interfaces and the Dependency Injection
+
+- You can introduce interfaces to break the dependencies between higher and lower level classes. 
+- IF you do that, both classes depend on the interface and no longer on each other. 
+
+
