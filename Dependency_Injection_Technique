@@ -20,7 +20,7 @@
 
 ## Four Roles in Dependency Injection
 
-If you want to use this technique, you need classes that fulfill four basic roles. These are:
+To use this technique, you need classes that fulfill four basic roles. These are:
 
   -  The service you want to use.
   -  The client that uses the service.
