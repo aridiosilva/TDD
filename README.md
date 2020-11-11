@@ -227,7 +227,8 @@ So the arrange section you only have code required to setup that specific test. 
 ## Example in Java of the use of AAA Unit Testing Patterning
 
 Following this pattern does make the code quite well structured and easy to understand. In general lines, it would look like this:
-    
+
+```java
      [TestClass]
      public class TestaCalc {
         [TestMethod]
