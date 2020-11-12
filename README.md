@@ -537,11 +537,11 @@ The vocabulary for talking about this soon gets messy - all sorts of words are u
 
 Meszaros uses the term Test Double as the generic term for any kind of pretend object used in place of a real object for testing purposes. The name comes from the notion of a Stunt Double in movies. (One of his aims was to avoid using any name that was already widely used.) Meszaros then defined five particular kinds of double:
 
-Dummy objects are passed around but never actually used. Usually they are just used to fill parameter lists.
-Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).
-Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.
-Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.
-Mocks are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+- Dummy objects are passed around but never actually used. Usually they are just used to fill parameter lists.
+- Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).
+- Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.
+-  Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.
+- Mocks are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
 Of these kinds of doubles, only mocks insist upon behavior verification. The other doubles can, and usually do, use state verification. Mocks actually do behave like other doubles during the exercise phase, as they need to make the SUT believe it's talking with its real collaborators - but mocks differ in the setup and the verification phases.
 
 To explore test doubles a bit more, we need to extend our example. Many people only use a test double if the real object is awkward to work with. A more common case for a test double would be if we said that we wanted to send an email message if we failed to fill an order. The problem is that we don't want to send actual email messages out to customers during testing. So instead we create a test double of our email system, one that we can control and manipulate.
