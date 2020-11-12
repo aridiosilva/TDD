@@ -249,15 +249,15 @@ Unit testing is essential to produce good software. In consequence, I would clai
 
 ### What is Mock?
 
-In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception). 
+- In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception).  
 
-Mock objects allow you to set up test scenarios without bringing to bear large, unwieldy resources such as databases. Instead of calling a database for testing, you can simulate your database using a mock object in your unit tests.
+- Mock objects allow you to set up test scenarios without bringing to bear large, unwieldy resources such as databases. Instead of calling a database for testing, you can simulate your database using a mock object in your unit tests.
 
 ### Reasons to use Mocks
 
-    - Mocking is a process used in unit testing when the unit being tested has external dependencies. The purpose of mocking is to isolate and focus on the code being tested and not on the behavior or state of external dependencies.
+     - Mocking is a process used in unit testing when the unit being tested has external dependencies. The purpose of mocking is to isolate and focus on the code being tested and not on the behavior or state of external dependencies.
 
-Let's start assuming that you already code following some driven development methodology centered on tests (TDD, ATDD or BDD). Or simply that you want to create a test for an existing class that relies on dependencies to achieve its functionality. In any case, when unit-testing a class, we want to test only its functionality and not that of its dependencies (either because we trust their implementation or because we'll test it ourselves). To achieve this, we need to provide to the object-under-test, a replacement that we can control for that dependency. This way we can force extreme return values, exception throwing or simply reduce time-consuming methods to a fixed return value. This controlled replacement is the mock, and it will help you to simplify test coding and to reduce test execution time.
+- Let's start assuming that you already code following some driven development methodology centered on tests (TDD, ATDD or BDD). Or simply that you want to create a test for an existing class that relies on dependencies to achieve its functionality. In any case, when unit-testing a class, we want to test only its functionality and not that of its dependencies (either because we trust their implementation or because we'll test it ourselves). To achieve this, we need to provide to the object-under-test, a replacement that we can control for that dependency. This way we can force extreme return values, exception throwing or simply reduce time-consuming methods to a fixed return value. This controlled replacement is the mock, and it will help you to simplify test coding and to reduce test execution time.
 
 ### Mock Concepts and Definitions
 
