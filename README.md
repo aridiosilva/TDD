@@ -273,16 +273,17 @@ Below there are four definitions based on the article written by Martin Fowler t
 
 Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
 
-### Java Mocking Frameworkings
+### Java Mocking Frameworks
 
 The most used Java Mocking Frameworks actually are the following ones:
 
-- Mockito 
+- **Mockito** 
 
     - Mockito is a powerful framework with only a few limitations. API and concepts are clear and consequently used. All needed operations are grouped in class org.mockito.Mockito. So, new developers will get used to Mockito very fast. The named limitations have only lead to slightly trouble in my projects.
     - Development of Mockito was started around 2008. Today it can be seen as old bull in world of mocking frameworks. Latest stable version is 1.10.19 from December 2014. Version 2.0 is in beta status since the beginning of 2015. However, the API did not change a lot. 
 
-- EasyMock -
-- JMockit - 
+- **EasyMock** -
+
+- **JMockit** - 
 
 
