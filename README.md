@@ -304,12 +304,16 @@ Developers targeting 100% code coverage are chasing the wrong metric.
 
 ### Different Types of Test Doubles
 
-- Based on the role played during testing, there can be different types of test doubles, and mock object is one of them. Some other types are dummy object, fake object, and stub. Below there are four definitions based on the article written by Martin Fowler that sums up the basics everyone should know about mocks:
+- Based on the role played during testing, there can be different types of test doubles, and mock object is one of them. Some other types are dummy object, fake object, and stub. Below there are five definitions based on vocabulary of Gerard Meszaros's book, and adopted in the article written by Martin Fowler that sums up the basics everyone should know about mocks:
 
   - **DUMMY OBJECTS** are passed around but never actually used. Usually, they are just used to fill parameter lists.
+ 
   - **FAKE OBJECTS** have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
+  
   - **STUBS** provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
+  
   - **SPY** is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
+  
   - **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
 
 
