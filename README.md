@@ -448,6 +448,60 @@ Below some JAva Mock Frameworks been used actualy:
 
 - **EasyMock** -
 
+   - EasyMock comes in its java and .NET versions. EasyMock also enable behavior verification, but has a couple of differences in style with jMock which are worth discussing. Here are the familiar tests again:
+
+```Java
+public class OrderEasyTester extends TestCase {
+  private static String TALISKER = "Talisker";
+  
+  private MockControl warehouseControl;
+  private Warehouse warehouseMock;
+  
+  public void setUp() {
+    warehouseControl = MockControl.createControl(Warehouse.class);
+    warehouseMock = (Warehouse) warehouseControl.getMock();    
+  }
+
+  public void testFillingRemovesInventoryIfInStock() {
+    //setup - data
+    Order order = new Order(TALISKER, 50);
+    
+    //setup - expectations
+    warehouseMock.hasInventory(TALISKER, 50);
+    warehouseControl.setReturnValue(true);
+    warehouseMock.remove(TALISKER, 50);
+    warehouseControl.replay();
+
+    //exercise
+    order.fill(warehouseMock);
+    
+    //verify
+    warehouseControl.verify();
+    assertTrue(order.isFilled());
+  }
+
+  public void testFillingDoesNotRemoveIfNotEnoughInStock() {
+    Order order = new Order(TALISKER, 51);    
+
+    warehouseMock.hasInventory(TALISKER, 51);
+    warehouseControl.setReturnValue(false);
+    warehouseControl.replay();
+
+    order.fill((Warehouse) warehouseMock);
+
+    assertFalse(order.isFilled());
+    warehouseControl.verify();
+  }
+}
+``
+
+- EasyMock uses a record/replay metaphor for setting expectations. For each object you wish to mock you create a control and mock object. The mock satisfies the interface of the secondary object, the control gives you additional features. To indicate an expectation you call the method, with the arguments you expect on the mock. You follow this with a call to the control if you want a return value. Once you've finished setting expectations you call replay on the control - at which point the mock finishes the recording and is ready to respond to the primary object. Once done you call verify on the control.
+
+- It seems that while people are often fazed at first sight by the record/replay metaphor, they quickly get used to it. It has an advantage over the constraints of jMock in that you are making actual method calls to the mock rather than specifying method names in strings. This means you get to use code-completion in your IDE and any refactoring of method names will automatically update the tests. The downside is that you can't have the looser constraints.
+
+The developers of jMock are working on a new version which will use other techniques to allow you use actual method calls.
+
+
 - **JMock**
 
 - **PowerMock**
@@ -507,11 +561,9 @@ public class MailServiceStub implements MailService {
     return messages.size();
   }
 }      
-``
-
+```
 
 We can then use state verification on the stub like this.
-
 
 ```Java
 class OrderStateTester...
@@ -523,7 +575,7 @@ class OrderStateTester...
     order.fill(warehouse);
     assertEquals(1, mailer.numberSent());
   }
-````
+```
 
 Of course this is a very simple test - only that a message has been sent. We've not tested it was sent to the right person, or with the right contents, but it will do to illustrate the point.
 
@@ -562,7 +614,7 @@ When saying “mocks” is referring to the term “Mock Object,” which is whe
 
 ```java  
      MyMock.Method("foo").Called(1).WithArgs("bar").Returns("raz")
-````
+```
 
 Having only integration testing is less than ideal though as unit tests help us design more robust software by easily testing alternate code and failure paths. We should save integration tests for larger “does it really work” kinds of tests.
 
