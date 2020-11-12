@@ -199,6 +199,8 @@ Each kata is crafted for and by the community. The author (or Sensei) who create
 
 ## Unit Testing 
 
+Unit tests guide code design and allow us to quickly verify that failure modes and logic-flows work as intended.
+
 ### Basics of Unit testing
 
 Check that your code is working as expected by creating and running unit tests. It's called unit testing because you break down the functionality of your program into discrete testable behaviors that you can test as individual units. 
@@ -242,6 +244,21 @@ Following this pattern does make the code quite well structured and easy to unde
         }
      }
 ```
+
+## Unit Testing vs Integration Testing 
+
+In software testing, it is common that the software artifact under test depends on other units [36]. Therefore, when testing a unit (e.g., a class in object-oriented programming), developers often need to decide whether to test the unit and all its dependencies together (similar to integration testing) or to simulate these dependencies and test that unit in isolation.
+
+By testing all dependencies together, developers gain realism: The test will more likely reflect the behavior in production [41]. However, some dependencies, such as databases and web services, may (1) slow the execution of the test [31], (2) be costly to properly setup for testing [37], and (3) require testers to have full control over such external dependencies [18]. By simulating its dependencies, developers gain focus: The test will cover only the specific unit and the expected interactions with its dependencies; moreover, inefficiencies of testing dependencies are mitigated.
+
+### Unit Testing
+
+When I say unit tests, I’m referring to those tests that ensure proper error handling and guide design of the system by testing small units of code. By unit, we could be referring to a whole package, an interface, or an individual method.
+
+### Integration Testing
+
+Integration testing is where you actually interact with dependent systems and/or libraries. 
+
 ## Test Double
 
 ### What is Test Double?
@@ -257,6 +274,26 @@ Following this pattern does make the code quite well structured and easy to unde
   - **STUBS** provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
   - **SPY** is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
   - **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
+
+## Using Fakes instead of Mocks n Unit Testing
+
+When saying “mocks” is referring to the term “Mock Object,” which is where we “replace domain code with dummy implementations that both emulate real functionality and enforce assertions about the behavior of our code”. Mocks assert behavior, like:
+
+```java  
+     MyMock.Method("foo").Called(1).WithArgs("bar").Returns("raz")
+````
+
+Having only integration testing is less than ideal though as unit tests help us design more robust software by easily testing alternate code and failure paths. We should save integration tests for larger “does it really work” kinds of tests.
+
+A great question showcasing a benefit to a traditional mock could be, “how do you know you called the s3 client with the correct parameters? With mocks, I can ensure that I passed the key value to the key parameter, and not the bucket parameter.” This is a valid concern and it should be covered under a test somewhere. The testing approach that I advocate here does not verify that you called the Minio client with the bucket and key parameters in the right order.
+
+A great quote said, “Mocking introduces assumptions, which introduces risk [Questions To Ask Yourself When Writing Tests by Michal Charemza: Mocking introduces assumptions, and assumptions introduce risk.]”. You are assuming the client library is implemented right, you are assuming all boundaries are solid, you are assuming you know how the library actually behaves.
+
+Mocking the library only mocks assumptions and makes your tests more brittle and subject to change when you update the code (which is what Martin Fowler concluded in Mocks Aren’t Stubs [3]). When the rubber meets the road, we are going to have to verify that we are actually using the Minio client correctly and this means integration tests (these might live in a Docker setup or a testing environment). Because we will have both unit and integration tests, there is no need for a unit test to cover the exact implementation as the integration test will cover that.
+
+### Why "Fakes rather than Mocks"? 
+
+A fake is a kind of test double that may contain business behavior. Fakes are merely structs that fit an interface and are a form of dependency injection where we control the behavior. The major benefit of fakes are that they decrease coupling in code, where mocks increase coupling, and coupling makes refactoring harder. Fakes provide flexibility and allow for easy testing and refactoring. They reduce dependencies compared to mocks, and are easy to maintain. By writing simple fakes that adhere to the interfaces, we can see that we do not need mocks, mocking frameworks, or mock generators to create code designed for testing. We’ve also noted that unit testing is not everything, and you must write integration tests to ensure that systems are properly integrated with one another.
 
 ## TDD Cycle and the Need of Use of Mocks in Unit-Testing
 
