@@ -242,5 +242,29 @@ Following this pattern does make the code quite well structured and easy to unde
         }
      }
 
+## Using Mocks in Unit-Testing in the TDD Cycle
+
+### What is Mock?
+
+### Reasons to use Mocks
+
+Let's start assuming that you already code following some driven development methodology centered on tests (TDD, ATDD or BDD). Or simply that you want to create a test for an existing class that relies on dependencies to achieve its functionality. In any case, when unit-testing a class, we want to test only its functionality and not that of its dependencies (either because we trust their implementation or because we'll test it ourselves). To achieve this, we need to provide to the object-under-test, a replacement that we can control for that dependency. This way we can force extreme return values, exception throwing or simply reduce time-consuming methods to a fixed return value. This controlled replacement is the mock, and it will help you to simplify test coding and to reduce test execution time.
+
+### Mock Concepts and Definitions
+
+Below there are four definitions based on the article written by Martin Fowler that sums up the basics everyone should know about mocks:
+
+- DUMMY OBJECTS are passed around but never actually used. Usually, they are just used to fill parameter lists.
+- FAKE OBJECTS have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
+- STUBS provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
+- MOCKS are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+
+### To Mock or Not to Mock: That Is the Question
+
+Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
+
+### Java Mocking Frameworkings
+
+
 
 
