@@ -275,25 +275,7 @@ Integration testing is where you actually interact with dependent systems and/or
   - **SPY** is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
   - **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
 
-## Using Fakes instead of Mocks n Unit Testing
 
-When saying “mocks” is referring to the term “Mock Object,” which is where we “replace domain code with dummy implementations that both emulate real functionality and enforce assertions about the behavior of our code”. Mocks assert behavior, like:
-
-```java  
-     MyMock.Method("foo").Called(1).WithArgs("bar").Returns("raz")
-````
-
-Having only integration testing is less than ideal though as unit tests help us design more robust software by easily testing alternate code and failure paths. We should save integration tests for larger “does it really work” kinds of tests.
-
-A great question showcasing a benefit to a traditional mock could be, “how do you know you called the s3 client with the correct parameters? With mocks, I can ensure that I passed the key value to the key parameter, and not the bucket parameter.” This is a valid concern and it should be covered under a test somewhere. The testing approach that I advocate here does not verify that you called the Minio client with the bucket and key parameters in the right order.
-
-A great quote said, “Mocking introduces assumptions, which introduces risk [Questions To Ask Yourself When Writing Tests by Michal Charemza: Mocking introduces assumptions, and assumptions introduce risk.]”. You are assuming the client library is implemented right, you are assuming all boundaries are solid, you are assuming you know how the library actually behaves.
-
-Mocking the library only mocks assumptions and makes your tests more brittle and subject to change when you update the code (which is what Martin Fowler concluded in Mocks Aren’t Stubs [3]). When the rubber meets the road, we are going to have to verify that we are actually using the Minio client correctly and this means integration tests (these might live in a Docker setup or a testing environment). Because we will have both unit and integration tests, there is no need for a unit test to cover the exact implementation as the integration test will cover that.
-
-### Why "Fakes rather than Mocks"? 
-
-A fake is a kind of test double that may contain business behavior. Fakes are merely structs that fit an interface and are a form of dependency injection where we control the behavior. The major benefit of fakes are that they decrease coupling in code, where mocks increase coupling, and coupling makes refactoring harder. Fakes provide flexibility and allow for easy testing and refactoring. They reduce dependencies compared to mocks, and are easy to maintain. By writing simple fakes that adhere to the interfaces, we can see that we do not need mocks, mocking frameworks, or mock generators to create code designed for testing. We’ve also noted that unit testing is not everything, and you must write integration tests to ensure that systems are properly integrated with one another.
 
 ## TDD Cycle and the Need of Use of Mocks in Unit-Testing
 
@@ -402,4 +384,24 @@ Below some JAva Mock Frameworks been used actualy:
     - expectations describe how the object under test should invoke its neighbors during the test. 
 
 
+## Using Fakes instead of Mocks n Unit Testing
 
+### Difference between Mocks and Fakes
+
+When saying “mocks” is referring to the term “Mock Object,” which is where we “replace domain code with dummy implementations that both emulate real functionality and enforce assertions about the behavior of our code”. Mocks assert behavior, like:
+
+```java  
+     MyMock.Method("foo").Called(1).WithArgs("bar").Returns("raz")
+````
+
+Having only integration testing is less than ideal though as unit tests help us design more robust software by easily testing alternate code and failure paths. We should save integration tests for larger “does it really work” kinds of tests.
+
+A great question showcasing a benefit to a traditional mock could be, “how do you know you called the s3 client with the correct parameters? With mocks, I can ensure that I passed the key value to the key parameter, and not the bucket parameter.” This is a valid concern and it should be covered under a test somewhere. The testing approach that I advocate here does not verify that you called the Minio client with the bucket and key parameters in the right order.
+
+A great quote said, “Mocking introduces assumptions, which introduces risk [Questions To Ask Yourself When Writing Tests by Michal Charemza: Mocking introduces assumptions, and assumptions introduce risk.]”. You are assuming the client library is implemented right, you are assuming all boundaries are solid, you are assuming you know how the library actually behaves.
+
+Mocking the library only mocks assumptions and makes your tests more brittle and subject to change when you update the code (which is what Martin Fowler concluded in Mocks Aren’t Stubs [3]). When the rubber meets the road, we are going to have to verify that we are actually using the Minio client correctly and this means integration tests (these might live in a Docker setup or a testing environment). Because we will have both unit and integration tests, there is no need for a unit test to cover the exact implementation as the integration test will cover that.
+
+### Why "Fakes rather than Mocks"? 
+
+A fake is a kind of test double that may contain business behavior. Fakes are merely structs that fit an interface and are a form of dependency injection where we control the behavior. The major benefit of fakes are that they decrease coupling in code, where mocks increase coupling, and coupling makes refactoring harder. Fakes provide flexibility and allow for easy testing and refactoring. They reduce dependencies compared to mocks, and are easy to maintain. By writing simple fakes that adhere to the interfaces, we can see that we do not need mocks, mocking frameworks, or mock generators to create code designed for testing. We’ve also noted that unit testing is not everything, and you must write integration tests to ensure that systems are properly integrated with one another.
