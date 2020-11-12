@@ -249,7 +249,7 @@ Unit testing is essential to produce good software. In consequence, I would clai
 
 ### What is Mock?
 
-- In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. 
+- In simple English, Mocking is make a replica or imitation of something. But in object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. 
 
 - A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception).  
 
@@ -257,7 +257,13 @@ Unit testing is essential to produce good software. In consequence, I would clai
 
 ### Reasons to use Mocks
 
-     - Mocking is a process used in unit testing when the unit being tested has external dependencies. The purpose of mocking is to isolate and focus on the code being tested and not on the behavior or state of external dependencies.
+In unit testing we want to test methods of one class in isolation. But classes are not isolated. They are using services and methods from other classes. So in that situation, we mock the services and methods from other classes and simulate the real behavior of them using some mocking frameworks and use that mocked methods and services to do unit testing in isolation. This is where Mocking frameworks come into play.
+
+Using mock objects allows developers to focus their tests on the behavior of the class under test without worrying about its dependencies. For example, testing a complex algorithm based on multiple objects being in particular states can be clearly expressed using mock objects in place of real objects.
+
+     - Mocking is a process used in unit testing when the unit being tested has external dependencies. 
+     - The purpose of mocking is to isolate and focus on the code being tested and not on the behavior
+       or state of external dependencies.
 
 - Let's start assuming that you already code following some driven development methodology centered on tests (TDD, ATDD or BDD). Or simply that you want to create a test for an existing class that relies on dependencies to achieve its functionality. In any case, when unit-testing a class, we want to test only its functionality and not that of its dependencies (either because we trust their implementation or because we'll test it ourselves). To achieve this, we need to provide to the object-under-test, a replacement that we can control for that dependency. This way we can force extreme return values, exception throwing or simply reduce time-consuming methods to a fixed return value. This controlled replacement is the mock, and it will help you to simplify test coding and to reduce test execution time.
 
@@ -275,9 +281,31 @@ Below there are four definitions based on the article written by Martin Fowler t
 
 Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
 
+### General Types of Mocking frameworks
+
+- Proxy based ( eg: EasyMock, JMock, Mockito)
+- Byte code Manipulation / Classloader remapping ( eg: jMockit, PowerMock)
+
+### What is Proxy based Mocking? How it works?
+
+- A proxy is just an object which will be used instead of the original object. If a method of the proxy object is called than the proxy object can decide what it will do with this call:
+ 
+   - delegate it to the original object
+   - handles the call itself
+
+- A proxy doesn’t require an instance of an interface/class if the proxy handles all method invocations itself.
+
+- Limits of Proxy
+
+   - There are a few important restrictions to the proxies. It’s not possible to:
+   - intercept static method calls
+   - intercept private method calls
+   - intercept final method calls
+   - build a proxy for a final class
+
 ### Java Mocking Frameworks
 
-The most used Java Mocking Frameworks actually are the following ones:
+Below some JAva Mock Frameworks been used actualy:
 
 - **Mockito** 
 
@@ -286,9 +314,13 @@ The most used Java Mocking Frameworks actually are the following ones:
 
 - **EasyMock** -
 
-- **JMock** 
+- **JMock**
 
-    - jMock is designed to make the expectation descriptions as clear as possible.The core concepts of the jMock API are the mockery, mock objects, and expectations. 
+- **PowerMock**
+
+- **JMockit** 
+
+    - jMockit is designed to make the expectation descriptions as clear as possible.The core concepts of the jMock API are the mockery, mock objects, and expectations. 
     - A mockery represents the context of the object under test, its neighboring objects; 
     - mock objects stand in for the real neighbors of the object under test while the test runs; and 
     - expectations describe how the object under test should invoke its neighbors during the test. 
