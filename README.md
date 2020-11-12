@@ -289,6 +289,27 @@ Below there are four definitions based on the article written by Martin Fowler t
 
 Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
 
+### When To Use Mock Objects?
+
+ In his 'Ode To Code' K Scott Allen offers rational for the use of mock objects when unit testing and discusses his thoughts on the use of mock object frameworks. Allen begins with a sharp argument to what's likely the most common misconception about mocks:
+
+    - Some people have a misconception that mock objects are only useful if you 
+      need to simulate interaction with a resource that is difficult to use in
+      unit tests - like an object that communicates with an SMTP server. This 
+      isn't true.
+      
+As stated by Colin Mackay's article on mocks listing some common scenarios mocks are useful, we have the following: 
+
+ - The real object has nondeterministic behavior
+ - The real object is difficult to setup
+ - The real object has behavior that is hard to trigger
+ - The real object is slow
+ - The real object is a user interface
+ - The real object uses a call back
+ - The real object does not yet exist
+
+More generally, "test doubles [mocks] are useful when you want to isolate code under test." In short, according to Allen mocks are to be used to keep the tests for business components independent of all other components the component under test is dependent on; 'A' uses 'B', 'A unit test' should break only if 'A' is broken, regardless of the condition of 'B'.
+
 ### General Types of Mocking frameworks
 
 - Proxy based ( eg: EasyMock, JMock, Mockito)
