@@ -406,7 +406,7 @@ class Person {
         // do some other stuff with the `sum`
     }
 }
-````
+```
 
 Can a test that tests the Person.calculate method without mocking the Calculator dependency (given, that the Calculator is a lightweight class that does not access "the outside world") be considered a unit test?
 
@@ -493,7 +493,7 @@ public class OrderEasyTester extends TestCase {
     warehouseControl.verify();
   }
 }
-``
+```
 
 - EasyMock uses a record/replay metaphor for setting expectations. For each object you wish to mock you create a control and mock object. The mock satisfies the interface of the secondary object, the control gives you additional features. To indicate an expectation you call the method, with the arguments you expect on the mock. You follow this with a call to the control if you want a return value. Once you've finished setting expectations you call replay on the control - at which point the mock finishes the recording and is ready to respond to the primary object. Once done you call verify on the control.
 
