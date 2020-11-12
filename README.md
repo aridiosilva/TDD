@@ -245,7 +245,11 @@ Following this pattern does make the code quite well structured and easy to unde
 
 ## Using Mocks in Unit-Testing in the TDD Cycle
 
+Unit testing is essential to produce good software. In consequence, I would claim that any Java developer knows (and uses) JUnit. As a unit test is intended to cover only a very small piece of code – in most cases a certain Java class – we want it to be independent of other classes. To achieve that we need to mock out these classes. In the Java world there are a couple of mocking frameworks around. 
+
 ### What is Mock?
+
+A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception). 
 
 ### Reasons to use Mocks
 
@@ -259,6 +263,7 @@ Below there are four definitions based on the article written by Martin Fowler t
 - FAKE OBJECTS have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
 - STUBS provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
 - MOCKS are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+- SPY is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
 
 ### To Mock or Not to Mock: That Is the Question
 
@@ -266,6 +271,14 @@ Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST a
 
 ### Java Mocking Frameworkings
 
+The most used Java Mocking Frameworks actually are the following ones:
 
+- Mockito 
+
+    - Mockito is a powerful framework with only a few limitations. API and concepts are clear and consequently used. All needed operations are grouped in class org.mockito.Mockito. So, new developers will get used to Mockito very fast. The named limitations have only lead to slightly trouble in my projects.
+    - Development of Mockito was started around 2008. Today it can be seen as old bull in world of mocking frameworks. Latest stable version is 1.10.19 from December 2014. Version 2.0 is in beta status since the beginning of 2015. However, the API did not change a lot. 
+
+- EasyMock -
+- JMockit - 
 
 
