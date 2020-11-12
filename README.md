@@ -381,7 +381,36 @@ More generally, "test doubles [mocks] are useful when you want to isolate code u
 
 By minimising side-effects in your code.
 
-Taking your example code, if calculator for example talks to a web API, then either you create fragile tests that rely on being able to interact with that web API, or you create a mock of it. If however its a deterministic, state-free set of calculation functions, then you don't (and shouldn't) mock it. If you do, you risk your mock behaving differently to the real code, leading to bugs in your tests.
+As I understand, the point of unit tests is to test units of code in isolation. This means, that:
+
+- They should not break by any unrelated code change elsewhere in the codebase.
+- Only one unit test should break by a bug in the tested unit, as opposed to integration tests (which may break in heaps).
+- All of this implies, that every outside dependency of a tested unit, should be mocked out. And I mean all the outside dependencies, not only the "outside layers" such as networking, filesystem, database, etc..
+
+This leads to a logical conclusion, that virtually every unit test needs to mock. On the other hand, a quick Google search about mocking reveals tons of articles that claim that "mocking is a code smell" and should mostly (though not completely) be avoided.
+
+Now, to the question(s).
+
+- How should unit tests be written properly?
+- Where exactly does the line between them and the integration tests lie?
+
+Update 1 -  Please consider the following pseudo code:
+
+```Java
+class Person {
+    constructor(calculator) {}
+
+    calculate(a, b) {
+        const sum = this.calculator.add(a, b);
+
+        // do some other stuff with the `sum`
+    }
+}
+````
+
+Can a test that tests the Person.calculate method without mocking the Calculator dependency (given, that the Calculator is a lightweight class that does not access "the outside world") be considered a unit test?
+
+Taking the example code above, if calculator for example talks to a web API, then either you create fragile tests that rely on being able to interact with that web API, or you create a mock of it. If however its a deterministic, state-free set of calculation functions, then you don't (and shouldn't) mock it. If you do, you risk your mock behaving differently to the real code, leading to bugs in your tests.
 
 Mocks should only be needed for code that read/writes to the file system, databases, URL endpoints etc; that are dependent on the environment you are running under; or that are highly stateful and non-deterministic in nature. So if you keep those parts of the code to a minimum and hide them behind abstractions, then they are easy to mock and the rest of your code avoids the need for mocks.
 
