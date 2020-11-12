@@ -459,6 +459,100 @@ Below some JAva Mock Frameworks been used actualy:
     - mock objects stand in for the real neighbors of the object under test while the test runs; and 
     - expectations describe how the object under test should invoke its neighbors during the test. 
 
+## Confusing betwen Stubs and Mocks
+
+In the Article "MOcks Aren´t Stubs" (https://martinfowler.com/articles/mocksArentStubs.html), the author Martin Fowler, states that:
+
+- " The term 'Mock Objects' has become a popular one to describe special case objects that mimic real objects for testing. Most language environments now have frameworks that make it easy to create mock objects. What's often not realized, however, is that mock objects are but one form of special case test object, one that enables a different style of testing. "
+
+- " how mock objects work, how they encourage testing based on behavior verification, and how the community around them uses them to develop a different style of testing."
+
+- "But as often as not I see mock objects described poorly. In particular I see them often confused with stubs - a common helper to testing environments. I understand this confusion - I saw them as similar for a while too, but conversations with the mock developers have steadily allowed a little mock understanding to penetrate my tortoiseshell cranium."
+
+- "This difference is actually two separate differences. On the one hand there is a difference in how test results are verified: a distinction between state verification and behavior verification. On the other hand is a whole different philosophy to the way testing and design play together, which I term here as the classical and mockist styles of Test Driven Development."
+
+### The Difference Between Mocks and Stubs
+
+When they were first introduced, many people easily confused mock objects with the common testing notion of using stubs. Since then it seems people have better understood the differences (and I hope the earlier version of this paper helped). However to fully understand the way people use mocks it is important to understand mocks and other kinds of test doubles. ("doubles"? Don't worry if this is a new term to you, wait a few paragraphs and all will be clear.)
+
+When you're doing testing like this, you're focusing on one element of the software at a time -hence the common term unit testing. The problem is that to make a single unit work, you often need other units - hence the need for some kind of warehouse in our example.
+
+In the two styles of testing I've shown above, the first case uses a real warehouse object and the second case uses a mock warehouse, which of course isn't a real warehouse object. Using mocks is one way to not use a real warehouse in the test, but there are other forms of unreal objects used in testing like this.
+
+The vocabulary for talking about this soon gets messy - all sorts of words are used: stub, mock, fake, dummy. For this article I'm going to follow the vocabulary of Gerard Meszaros's book. It's not what everyone uses, but I think it's a good vocabulary and since it's my essay I get to pick which words to use.
+
+Meszaros uses the term Test Double as the generic term for any kind of pretend object used in place of a real object for testing purposes. The name comes from the notion of a Stunt Double in movies. (One of his aims was to avoid using any name that was already widely used.) Meszaros then defined five particular kinds of double:
+
+Dummy objects are passed around but never actually used. Usually they are just used to fill parameter lists.
+Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example).
+Stubs provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test.
+Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent.
+Mocks are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+Of these kinds of doubles, only mocks insist upon behavior verification. The other doubles can, and usually do, use state verification. Mocks actually do behave like other doubles during the exercise phase, as they need to make the SUT believe it's talking with its real collaborators - but mocks differ in the setup and the verification phases.
+
+To explore test doubles a bit more, we need to extend our example. Many people only use a test double if the real object is awkward to work with. A more common case for a test double would be if we said that we wanted to send an email message if we failed to fill an order. The problem is that we don't want to send actual email messages out to customers during testing. So instead we create a test double of our email system, one that we can control and manipulate.
+
+Here we can begin to see the difference between mocks and stubs. If we were writing a test for this mailing behavior, we might write a simple stub like this.
+
+```Java
+public interface MailService {
+  public void send (Message msg);
+}
+public class MailServiceStub implements MailService {
+  private List<Message> messages = new ArrayList<Message>();
+  public void send (Message msg) {
+    messages.add(msg);
+  }
+  public int numberSent() {
+    return messages.size();
+  }
+}      
+``
+
+
+We can then use state verification on the stub like this.
+
+
+```Java
+class OrderStateTester...
+
+  public void testOrderSendsMailIfUnfilled() {
+    Order order = new Order(TALISKER, 51);
+    MailServiceStub mailer = new MailServiceStub();
+    order.setMailer(mailer);
+    order.fill(warehouse);
+    assertEquals(1, mailer.numberSent());
+  }
+````
+
+Of course this is a very simple test - only that a message has been sent. We've not tested it was sent to the right person, or with the right contents, but it will do to illustrate the point.
+
+Using mocks this test would look quite different.
+
+```Java
+class OrderInteractionTester...
+
+  public void testOrderSendsMailIfUnfilled() {
+    Order order = new Order(TALISKER, 51);
+    Mock warehouse = mock(Warehouse.class);
+    Mock mailer = mock(MailService.class);
+    order.setMailer((MailService) mailer.proxy());
+
+    mailer.expects(once()).method("send");
+    warehouse.expects(once()).method("hasInventory")
+      .withAnyArguments()
+      .will(returnValue(false));
+
+    order.fill((Warehouse) warehouse.proxy());
+  }
+}
+```
+
+In both cases I'm using a test double instead of the real mail service. There is a difference in that the stub uses state verification while the mock uses behavior verification.
+
+In order to use state verification on the stub, I need to make some extra methods on the stub to help with verification. As a result the stub implements MailService but adds extra test methods.
+
+Mock objects always use behavior verification, a stub can go either way. Meszaros refers to stubs that use behavior verification as a Test Spy. The difference is in how exactly the double runs and verifies and I'll leave that for you to explore on your own.
 
 ## Using Fakes instead of Mocks n Unit Testing
 
