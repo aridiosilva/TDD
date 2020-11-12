@@ -253,11 +253,48 @@ By testing all dependencies together, developers gain realism: The test will mor
 
 ### Unit Testing
 
-When I say unit tests, I’m referring to those tests that ensure proper error handling and guide design of the system by testing small units of code. By unit, we could be referring to a whole package, an interface, or an individual method.
+Unit tests test individual units (modules, functions, classes) in isolation from the rest of the application.
+
+In general, units are tested using only the public interface of the unit (aka “public API” or “surface area”). This is referred to as black box testing. Black box testing leads to less brittle tests, because the implementation details of a unit tend to change more over time than the public API of the unit. If you use white box testing, where tests are aware of implementation details, any change to the implementation details could break the test, even if the public API continues to function as expected. In other words, white-box testing leads to wasted rework.
+
+the point of unit tests is to test units of code in isolation.
+
+Martin Fowler on Unit Test
+
+"Unit testing is often talked about in software development, and is a term that I've been familiar with during my whole time writing programs. Like most software development terminology, however, it's very ill-defined, and I see confusion can often occur when people think that it's more tightly defined than it actually is."
+
+What Kent Beck wrote in Test Driven Development, By Example
+
+"I call them "unit tests", but they don't match the accepted definition of unit tests very well"
+
+Any given claim of "the point of unit tests is" will depend heavily on what definition of "unit test" is being considered.
+
+If your perspective is that your program is composed of many small units that depend on one another, and if you constrain yourself to a style that tests each unit in isolation, then a lot of test doubles is an inevitable conclusion.
 
 ### Integration Testing
 
-Integration testing is where you actually interact with dependent systems and/or libraries. 
+Integration testing is where you actually interact with dependent systems and/or libraries. Contrast unit tests with integration tests, which test integrations between two or more units, and functional tests, which test the application from the point of view of the user, including complete user interaction workflows from simulated UI manipulation, to data layer updates, and back to the user output (e.g., the on-screen representation of the app). Functional tests are a subset of integration tests, because they test all of the units of an application, integrated in the context of the running application.
+
+## What is test coverage?
+
+Code coverage refers to the amount of code covered by test cases. Coverage reports can be created by instrumenting the code and recording which lines were exercised during a test run. In general, we try to produce a high level of coverage, but code coverage starts to deliver diminishing returns as it gets closer to 100%.
+
+In my experience, increasing coverage beyond ~90% seems to have little continued correlation with lower bug density.  Why would that be? Doesn’t 100% tested code mean that we know with 100% certainty that the code does what it was designed to do?  It turns out, it’s not that simple.
+
+What most people don’t realize is that there are two kinds of coverage:
+
+ - Code coverage: how much of the code is exercised, and
+-  Case coverage: how many of the use-cases are covered by the test suites
+
+Case coverage refers to use-case scenarios: How the code will behave in the context of real world environment, with real users, real networks, and even hackers intentionally trying to subvert the design of the software for nefarious purposes.
+
+Coverage reports identify code-coverage weaknesses, not case-coverage weaknesses. The same code may apply to more than one use-case, and a single use-case may depend on code outside the subject-under-test, or even in a separate application or 3rd party API.
+
+Because use-cases may involve the environment, multiple units, users, and networking conditions, it is impossible to cover all required use-cases with a test suite that only contains unit tests. Unit tests by definition test units in isolation, not in integration, meaning that a test suite containing only unit tests will always have close to 0% case coverage for integration and functionaluse-case scenarios.
+
+100% code coverage does not guarantee 100% case coverage. 
+
+Developers targeting 100% code coverage are chasing the wrong metric.
 
 ## Test Double
 
