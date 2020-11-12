@@ -243,13 +243,15 @@ Following this pattern does make the code quite well structured and easy to unde
      }
 ```
 
-## Using Mocks in Unit-Testing in the TDD Cycle
+## Using Mocks in Unit-Testing inside of TDD Cycle
 
 Unit testing is essential to produce good software. In consequence, I would claim that any Java developer knows (and uses) JUnit. As a unit test is intended to cover only a very small piece of code – in most cases a certain Java class – we want it to be independent of other classes. To achieve that we need to mock out these classes. In the Java world there are a couple of mocking frameworks around. 
 
 ### What is Mock?
 
-- In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception).  
+- In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. 
+
+- A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception).  
 
 - Mock objects allow you to set up test scenarios without bringing to bear large, unwieldy resources such as databases. Instead of calling a database for testing, you can simulate your database using a mock object in your unit tests.
 
@@ -263,11 +265,11 @@ Unit testing is essential to produce good software. In consequence, I would clai
 
 Below there are four definitions based on the article written by Martin Fowler that sums up the basics everyone should know about mocks:
 
-- DUMMY OBJECTS are passed around but never actually used. Usually, they are just used to fill parameter lists.
-- FAKE OBJECTS have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
-- STUBS provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
-- MOCKS are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
-- SPY is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
+- **DUMMY OBJECTS** are passed around but never actually used. Usually, they are just used to fill parameter lists.
+- **FAKE OBJECTS** have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
+- **STUBS** provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
+- **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
+- **SPY** is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
 
 ### To Mock or Not to Mock: That Is the Question
 
@@ -284,6 +286,12 @@ The most used Java Mocking Frameworks actually are the following ones:
 
 - **EasyMock** -
 
-- **JMockit** - 
+- **JMock** 
+
+    - jMock is designed to make the expectation descriptions as clear as possible.The core concepts of the jMock API are the mockery, mock objects, and expectations. 
+    - A mockery represents the context of the object under test, its neighboring objects; 
+    - mock objects stand in for the real neighbors of the object under test while the test runs; and 
+    - expectations describe how the object under test should invoke its neighbors during the test. 
+
 
 
