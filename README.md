@@ -243,9 +243,17 @@ Following this pattern does make the code quite well structured and easy to unde
      }
 ```
 
-## Using Mocks in Unit-Testing inside of TDD Cycle
+## TDD Cycle and the Need of Use of Mocks in Unit-Testing
 
 Unit testing is essential to produce good software. In consequence, I would claim that any Java developer knows (and uses) JUnit. As a unit test is intended to cover only a very small piece of code – in most cases a certain Java class – we want it to be independent of other classes. To achieve that we need to mock out these classes. In the Java world there are a couple of mocking frameworks around. 
+
+Unit tests should be small tests (atomic), lightweight, and fast. However, an object under test might have dependencies on other objects. It might need to interact with a database, communicate with a mail server, or talk to a web service or a message queue. All these services might not be available during unit testing. Even if they are available, unit testing the object under test along with its dependencies can take unacceptable amount of time. What if...
+
+ - The web service is not reachable?
+ - The database is down for maintenance?
+ - The message queue is heavy and slow?
+ 
+These all defeat the whole purpose of unit tests being atomic, lightweight, and fast. We want unit tests to execute in a few milliseconds. If the unit tests are slow, your builds become slow, which affects the productivity of your development team. The solution is to use mocking, a way to provide test doubles for your classes being tested.
 
 ### What is Mock?
 
@@ -295,9 +303,8 @@ Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST a
 
 - A proxy doesn’t require an instance of an interface/class if the proxy handles all method invocations itself.
 
-- Limits of Proxy
+- Limits of Proxy - There are a few important restrictions to the proxies. It’s not possible to:
 
-   - There are a few important restrictions to the proxies. It’s not possible to:
    - intercept static method calls
    - intercept private method calls
    - intercept final method calls
