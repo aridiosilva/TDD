@@ -244,7 +244,7 @@ Following this pattern does make the code quite well structured and easy to unde
 ```
 ## Test Double
 
-### What is TEs Double?
+### What is Test Double?
 
 - In unit test, a test double is a replacement of a dependent component (collaborator) of the object under test. A test double provides the same interface as of the collaborator. It may not be the complete interface, but for the functionality required for the test. Also, the test double does not have to behave exactly as the collaborator. The purpose is to mimic the collaborator to make the object under test think that it is actually using the collaborator.
 
@@ -292,13 +292,7 @@ Using mock objects allows developers to focus their tests on the behavior of the
 
 ### Mock Concepts and Definitions
 
-Below there are four definitions based on the article written by Martin Fowler that sums up the basics everyone should know about mocks:
-
-- **DUMMY OBJECTS** are passed around but never actually used. Usually, they are just used to fill parameter lists.
-- **FAKE OBJECTS** have working implementations, but usually, take some shortcut which makes them not suitable for production (an in memory database is a good example).
-- **STUBS** provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it ‘sent', or maybe only how many messages it ‘sent'.
-- **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive.
-- **SPY** is used to introduce a kind of observer for a real object. So, you can do asserts on invocations, too. In contrast to a mock a spied object still acts like it would do in production. 
+**MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others (dummy, stubs, fake, spy) is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
 
 ### To Mock or Not to Mock: That Is the Question
 
