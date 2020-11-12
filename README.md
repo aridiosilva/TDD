@@ -241,7 +241,7 @@ Following this pattern does make the code quite well structured and easy to unde
             Assert.AreEqual(5, result);
         }
      }
-'''
+```
 
 ## Using Mocks in Unit-Testing in the TDD Cycle
 
