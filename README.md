@@ -377,6 +377,16 @@ More generally, "test doubles [mocks] are useful when you want to isolate code u
 
   - 'A' uses 'B', 'A unit test' should break only if 'A' is broken, regardless of the condition of 'B'.
 
+## How exactly should unit tests be written without mocking extensively?
+
+By minimising side-effects in your code.
+
+Taking your example code, if calculator for example talks to a web API, then either you create fragile tests that rely on being able to interact with that web API, or you create a mock of it. If however its a deterministic, state-free set of calculation functions, then you don't (and shouldn't) mock it. If you do, you risk your mock behaving differently to the real code, leading to bugs in your tests.
+
+Mocks should only be needed for code that read/writes to the file system, databases, URL endpoints etc; that are dependent on the environment you are running under; or that are highly stateful and non-deterministic in nature. So if you keep those parts of the code to a minimum and hide them behind abstractions, then they are easy to mock and the rest of your code avoids the need for mocks.
+
+For the code points that do have side effects, it's worth writing tests that mock and tests that don't. The latter though need care as they will inherently be fragile and possibly slow. So you may want to only run them say overnight on a CI server, rather than every time you save and build your code. The former tests though should be run as often as practicable. As to whether each test is then a unit or integration test becomes academic and avoids "flame wars" over what is and isn't a unit test.
+
 ### General Types of Mocking frameworks
 
 - Proxy based ( eg: EasyMock, JMock, Mockito)
