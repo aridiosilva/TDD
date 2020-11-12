@@ -308,7 +308,9 @@ As stated by Colin Mackay's article on mocks listing some common scenarios mocks
  - The real object uses a call back
  - The real object does not yet exist
 
-More generally, "test doubles [mocks] are useful when you want to isolate code under test." In short, according to Allen mocks are to be used to keep the tests for business components independent of all other components the component under test is dependent on; 'A' uses 'B', 'A unit test' should break only if 'A' is broken, regardless of the condition of 'B'.
+More generally, "test doubles [mocks] are useful when you want to isolate code under test." In short, according to Allen mocks are to be used to keep the tests for business components independent of all other components the component under test is dependent on;
+
+  - 'A' uses 'B', 'A unit test' should break only if 'A' is broken, regardless of the condition of 'B'.
 
 ### General Types of Mocking frameworks
 
