@@ -360,7 +360,7 @@ Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST a
 
 
 
-## When isn’t mocking appropriate?
+### When isn’t mocking appropriate?
 
 Mocks work best when the code being tested isn’t tightly coupled; decoupled code tends to result from Test Driven Development (TDD), which no doubt partially explains why mocking is encouraged in the TDD community. For tightly coupled code (as is often present in legacy code), it might be the case that two or more classes form one unit, which can still be tested with a unit test. If not, think about whether the paired class has a lot of its own logic and whether it matters to test it separately. If not, don’t write a mock for it.
 
@@ -454,12 +454,28 @@ For the code points that do have side effects, it's worth writing tests that moc
 
 ### Java Mocking Frameworks
 
+You can write mocks manually, but a few open source mocking frameworks make it a lot faster and easier to maintain your mocks if you write tests frequently (which you should!). 
+
+Many mocking frameworks for Java code work in combination with JUnit and other popular unit testing frameworks, and are great depending on your specific needs.
+
+Two of the most widely used are Mockito and PowerMock. 
+
+Starting tips:
+
+- Get your unit testing techniques in shape 
+- Choose a testing framework
+- Choose a mocking framework
+
 Below some JAva Mock Frameworks been used actualy:
 
 - **Mockito** 
 
     - Mockito is a powerful framework with only a few limitations. API and concepts are clear and consequently used. All needed operations are grouped in class org.mockito.Mockito. So, new developers will get used to Mockito very fast. The named limitations have only lead to slightly trouble in my projects.
     - Development of Mockito was started around 2008. Today it can be seen as old bull in world of mocking frameworks. Latest stable version is 1.10.19 from December 2014. Version 2.0 is in beta status since the beginning of 2015. However, the API did not change a lot. 
+    
+- **PowerMock""
+
+   - Mockito is useful for all but the most complicated cases, for which you can use PowerMock instead. Fortunately these frameworks are compatible with each other, so you can start in Mockito for most mocks and switch to PowerMock for the more complex cases
 
 - **EasyMock** -
 
