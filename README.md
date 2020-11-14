@@ -473,7 +473,7 @@ Below some JAva Mock Frameworks been used actualy:
     - Mockito is a powerful framework with only a few limitations. API and concepts are clear and consequently used. All needed operations are grouped in class org.mockito.Mockito. So, new developers will get used to Mockito very fast. The named limitations have only lead to slightly trouble in my projects.
     - Development of Mockito was started around 2008. Today it can be seen as old bull in world of mocking frameworks. Latest stable version is 1.10.19 from December 2014. Version 2.0 is in beta status since the beginning of 2015. However, the API did not change a lot. 
     
-- **PowerMock""
+- **PowerMock**
 
    - Mockito is useful for all but the most complicated cases, for which you can use PowerMock instead. Fortunately these frameworks are compatible with each other, so you can start in Mockito for most mocks and switch to PowerMock for the more complex cases
 
