@@ -354,11 +354,19 @@ Using mock objects allows developers to focus their tests on the behavior of the
 
 **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others (dummy, stubs, fake, spy) is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
 
+### How to effectively incorporate mocking into your unit tests
+
+Mocking is an important part of unit testing components with integrations and those that rely on external dependencies. But what exactly is it? In tests, mocking is using mock objects with fake business logic to replicate the function of a real object. 
+
+Mocks can produce better tests by reducing a factor that could cause the test to fail (e.g. needing to access an external resource like a database, which could be offline for reasons unrelated to your test) and helping you isolate the classes being tested. They can also save time and stop you from being charged for accessing these external resources. 
+
+### Too much of a good thing?
+
+Mocks are important to know how to use well, which means you have to really understand your code and its intended behavior; ideally, mocks are used only when necessary. However, new test writers sometimes go overboard, which runs the risk of slowing down tests and making them needlessly complicated. Using too many mocks can even affect whether you’re ultimately testing the right thing, e.g. testing that something is implemented in a specific way, rather than testing that the desired outcome occurs. 
+
 ### To Mock or Not to Mock: That Is the Question
 
 Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
-
-
 
 ### When isn’t mocking appropriate?
 
@@ -367,7 +375,6 @@ Mocks work best when the code being tested isn’t tightly coupled; decoupled co
 Similarly, don’t mock value objects; there’s simply no reason to because they don’t have their own logic. Also avoid mocking concrete classes, because these trap you in a certain implementation of the class you’re mocking.
 
 In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
-
 
 ### When To Use Mock Objects?
 
