@@ -358,6 +358,17 @@ Using mock objects allows developers to focus their tests on the behavior of the
 
 Not everything must be mocked. Sometimes it's better to do an INTEGRATION TEST as mocking that method/feature would be just working for little actual benefit. 
 
+
+
+## When isn’t mocking appropriate?
+
+Mocks work best when the code being tested isn’t tightly coupled; decoupled code tends to result from Test Driven Development (TDD), which no doubt partially explains why mocking is encouraged in the TDD community. For tightly coupled code (as is often present in legacy code), it might be the case that two or more classes form one unit, which can still be tested with a unit test. If not, think about whether the paired class has a lot of its own logic and whether it matters to test it separately. If not, don’t write a mock for it.
+
+Similarly, don’t mock value objects; there’s simply no reason to because they don’t have their own logic. Also avoid mocking concrete classes, because these trap you in a certain implementation of the class you’re mocking.
+
+In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
+
+
 ### When To Use Mock Objects?
 
  In his 'Ode To Code' K Scott Allen offers rational for the use of mock objects when unit testing and discusses his thoughts on the use of mock object frameworks. Allen begins with a sharp argument to what's likely the most common misconception about mocks:
