@@ -353,7 +353,7 @@ itself. Examples are classes from Java I/O and Java Util classes (Date, Calendar
 
  -  ***Web Service***: Classes that perform some HTTP action. As with the database category, this dependency can be either an external library (such as Java HTTP) or a class that depends on such library.
  
- - ***External dependency: Libraries (or classes that make use of libraries) that are external to the current project. Examples are Jetty and Ruby runtimes, JSON parsing libraries (such as GSON), e-mail libraries, etc. 
+ - ***External dependency***: Libraries (or classes that make use of libraries) that are external to the current project. Examples are Jetty and Ruby runtimes, JSON parsing libraries (such as GSON), e-mail libraries, etc. 
  
 -  ***Test support***: Classes that support testing itself. Examples are fake domain objects, test data builders and web services for tests.
 
