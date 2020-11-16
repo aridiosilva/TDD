@@ -338,6 +338,25 @@ These all defeat the whole purpose of unit tests being atomic, lightweight, and 
 
 - Mock objects allow you to set up test scenarios without bringing to bear large, unwieldy resources such as databases. Instead of calling a database for testing, you can simulate your database using a mock object in your unit tests.
 
+### What dependencies to Develop Mocks?
+
+What type of dependency th mocks are simulating? I´m relying on the categories proposed by Spadini et al at his study named "To Mock or Not To Mock? An Empirical
+Study on Mocking Practices" (Davide Spadini, Maur´ıcio Aniche, Magiel Bruntink, Alberto Bacchelli), as the following explained:
+
+ -  ***Domain object***: Classes that contain the (business) rules of the system. Most of these classes usually depend on other domain objects. They do not depend on any external
+resources. The definition of this category fits well to the definition of Domain Object [15] and Domain Logic [16] architectural layers. Examples are entities, services and
+utility classes.
+
+ -  ***Database***: Classes that interact with an external database. These classes can be either an external library (such as Java SQL, JDBC, Hibernate, or ElasticSearch APIs) or
+a class that depends on such external libraries (e.g., an implementation of the Data Access Object [16] pattern). • Native Java libraries: Libraries that are part of the Java
+itself. Examples are classes from Java I/O and Java Util classes (Date, Calendar).
+
+ -  ***Web Service***: Classes that perform some HTTP action. As with the database category, this dependency can be either an external library (such as Java HTTP) or a class that depends on such library.
+ 
+ - ***External dependency: Libraries (or classes that make use of libraries) that are external to the current project. Examples are Jetty and Ruby runtimes, JSON parsing libraries (such as GSON), e-mail libraries, etc. 
+ 
+-  ***Test support***: Classes that support testing itself. Examples are fake domain objects, test data builders and web services for tests.
+
 ### Reasons to use Mocks
 
 In unit testing we want to test methods of one class in isolation. But classes are not isolated. They are using services and methods from other classes. So in that situation, we mock the services and methods from other classes and simulate the real behavior of them using some mocking frameworks and use that mocked methods and services to do unit testing in isolation. This is where Mocking frameworks come into play.
