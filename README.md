@@ -399,6 +399,7 @@ In some cases, different types of “test doubles” similar to mocks are more a
 
  - Mocks may reduce teste readability and be difficult to maintain;
  - Execssive use of mocks is an indicative of poorly engineered code;
+ - the use of mocks does not guarantee that your code will behave as expected in production (high chances of just the opposite can happens!);
  - 
 
 ### When To Use Mock Objects?
