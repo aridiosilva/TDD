@@ -395,12 +395,14 @@ Similarly, don’t mock value objects; there’s simply no reason to because the
 
 In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
 
-### Trade-offs using Mocks
+### Trade-offs using Mocks and Recommendations
 
  - Mocks may reduce teste readability and be difficult to maintain;
  - Execssive use of mocks is an indicative of poorly engineered code;
- - the use of mocks does not guarantee that your code will behave as expected in production (high chances of just the opposite can happens!);
- - 
+ - the use of mocks does not guarantee that your code will behave as expected in production - You are always guessing that what you mock will work (and keep working) that way when using the real objects);
+ - I do not remember a single case in wich I found a bug using mocks;
+ - Excessive use of mocking means the existence of lot of dependencies - it is a smell in the code and a sumptom of a badly designed class - If the production code estructure is well defined, we should use less mocks;
+ - Good production code ease the process of testing and by consequence the need to use mocks;
 
 ### When To Use Mock Objects?
 
