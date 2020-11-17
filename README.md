@@ -407,6 +407,22 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
  - Good production code ease the process of testing and reduce the mock usage;
  - A problem when using mocks is maintaining the behavior of the mock compatible with the behavior of original class, especially when the class is poorly designed or highly coupled. As the production class tends to change often, the mock object becomes unstable and, as a consequence, more prone to change. 
 
+### Mock Recommendations
+
+The use of mocks in Unit Testing is a controversial topic (maybe less so now than several years ago. By none of the following practices are good enought:
+
+   - Mocking almost every dependency (code smell);
+   - Only mocking external dependencies (not all external dependencies should be mocked);
+   - "no-mocks" policy
+ 
+It is hard to decide what should be mocked and shouldn´t be mocked. But the extremes listed above not are good ones to follow. Below some points to consider when deciding what to mock: 
+
+- Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation”;
+- Use less mocks as you can;
+- Do not mock final classes and static methods - since static method has everything you need to use it, so it defeats the purpose of mocking, and doing that is considered a bad practice;
+- The objective of the tests is to make sure things are working and that the new code doesn’t cause any problems with the existing code. We do not get this level of confidence if we have a test that mocks all its collaborators;
+- 
+
 ### When To Use Mock Objects?
 
  In his 'Ode To Code' K Scott Allen offers rational for the use of mock objects when unit testing and discusses his thoughts on the use of mock object frameworks. Allen begins with a sharp argument to what's likely the most common misconception about mocks:
