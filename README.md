@@ -418,7 +418,7 @@ The use of mocks in Unit Testing is a controversial topic (maybe less so now tha
 It is hard to decide what should be mocked and shouldn´t be mocked. But the extremes listed above not are good ones to follow. Below some points to consider when deciding what to mock: 
 
 - Gerard Meszaros in his Book suggests that components that make testing difficult are candidates to be mocked;
-- Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation” - as the test exercises the abstract behavior that is offered by the interface.;
+- Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation” - as the test exercises the abstract behavior that is offered by the interface. Without the usage of a mock, developers would have to choose one out of the many possible implementations of the interface, making the test more coupled to the specific implementation.;
 - Use less mocks as you can;
 - Do not mock final classes and static methods - since static method has everything you need to use it, so it defeats the purpose of mocking, and doing that is considered a bad practice;
 - The objective of the tests is to make sure things are working and that the new code doesn’t cause any problems with the existing code. We do not get this level of confidence if we have a test that mocks all its collaborators;
