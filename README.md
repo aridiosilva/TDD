@@ -397,12 +397,15 @@ In some cases, different types of “test doubles” similar to mocks are more a
 
 ### Trade-offs using Mocks and Recommendations
 
+The use of mocks poses several challenges. Among all, a major problem is maintaining the behavior of the mock compatible with the original class. Furthermore, mocks may hide important design problems. Finally, while mocking may be the only way to test legacy systems, using them in such systems is not a straightforward task.
+
  - Mocks may reduce test readability and be difficult to maintain;
  - Excessive use of mocks is an indicative of poorly engineered code;
  - Use of mocks does not guarantee that your code will behave as expected in production - You´ll be always guessing that what you mock will work (and keep working) that way when using the real objects;
  - I do not remember a single case in wich I found a bug using mocks;
  - Excessive use of mocking means the existence of lot of dependencies in the class - it is a smell in the code and a symptom of a badly designed class - If the production code estructure is well defined, we should use less mocks;
  - Good production code ease the process of testing and reduce the mock usage;
+ - A problem when using mocks is maintaining the behavior of the mock compatible with the behavior of original class, especially when the class is poorly designed or highly coupled. As the production class tends to change often, the mock object becomes unstable and, as a consequence, more prone to change. 
 
 ### When To Use Mock Objects?
 
