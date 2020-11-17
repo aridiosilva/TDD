@@ -405,7 +405,7 @@ Mocking is a approach for handling dependencies while unit testing, but it comes
 
 ###  Mocks Can Lead to Violations of the DRY Principle
 
-I first read about the DRY principle in “The Pragmatic Programmer” by Andrew Hunt and Dave Thomas. They state it as: “Every piece of knowledge must have a single, unambiguous, authoritative representation within a system” (p. 27).  So, this isn’t just about code duplication – it is about knowledge duplication. When you use a mock you are in violation of this principle because the knowledge of how the components in the system interact is defined in two places: once in the production code and once in the tests. Any change to those interactions has to be made in two places.
+The DRY principle as defined in book “The Pragmatic Programmer”, by Andrew Hunt and Dave Thomas, states: “Every piece of knowledge must have a single, unambiguous, authoritative representation within a system” (p. 27).  So, this isn’t just about code duplication – it is about knowledge duplication. When you use a mock you are in violation of this principle because the knowledge of how the components in the system interact is defined in two places: once in the production code and once in the tests. Any change to those interactions has to be made in two places.
 
 ### Mocks Make Refactoring Harder
 
