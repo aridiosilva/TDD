@@ -395,34 +395,6 @@ Similarly, don’t mock value objects; there’s simply no reason to because the
 
 In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
 
-### The Costs of Mocking
-
-Mocking is a approach for handling dependencies while unit testing, but it comes at a cost. It is important to recognize these costs, so we can choose (carefully) when the benefits outweigh that cost and when they don’t.  There are 3 reasons to mock in a restricted or infrequent manner. All of these 3 reasons below are interrelated (and, you could argue, are just different ways of saying the same thing), but let’s take them one at a time.
-
- - Using mocks leads to violations of the DRY principle.
- - Using mocks makes refactoring harder.
- - Using mocks can reduce the simplicity of the design.
-
-###  Mocks Can Lead to Violations of the DRY Principle
-
-The DRY principle as defined in book “The Pragmatic Programmer”, by Andrew Hunt and Dave Thomas, states: “Every piece of knowledge must have a single, unambiguous, authoritative representation within a system” (p. 27).  So, this isn’t just about code duplication – it is about knowledge duplication. When you use a mock you are in violation of this principle because the knowledge of how the components in the system interact is defined in two places: once in the production code and once in the tests. Any change to those interactions has to be made in two places.
-
-### Mocks Make Refactoring Harder
-
-In the preface of Martin Fowler’s “Refactoring” book, he defines refactoring as “the process of changing a software system in such a way that it does not alter the external behavior of the code yet improves its internal structure”. One of the XP practices is “refactor mercilessly”. A fair assumption when practicing merciless refactoring is that unit tests should pass before and after any given refactoring that we do. This is the essence of the red-green-refactor cycle: we only attempt a refactoring when we are in a “green” state, and we expect to still be in a “green” state after the refactoring.
-
-But mocks break this assumption, because with mocks our tests do NOT merely test the “external behavior of the code” but also test the internal workings of the code under test — specifically what other modules are being used and how.
-
-Here’s an example that just happened to me recently. I started out with class A invoking methods on two other classes, B and C.  Then I realized the design could be improved if I structured things this way: The functionality of A had not changed, as far as its external behavior goes. But in the tests for A, I had mocked out B, so with this refactoring many of the A tests were now broken. Mocking couples the production code to the test code in a way that hinders refactoring, because with mocks your test code knows about the internal workings of the code under test.
-
-Mocking also inhibits refactoring because some refactoring tools do not cleanly refactor code that uses mocks (renaming a method, for example, may not catch method names that are represented as strings, as in some mocking frameworks).
-
-### Mocks Reduce Design Simplicity
-
-In Cory Haines’ book “Understanding the Four Rules of Simple Design”, he defines a simple design as “one that is easy to change”. As illustrated in the above example, the use of mocks makes the system harder to change.  When the system is harder to change, we become reluctant to refactor, and the design slowly deteriorates over time.
-
-Arlo Belshee asserts that the need for mocking is a sign of a design with too many dependencies. At a Seattle Software Craftsmanship meetup in May of 2014 he put it this way: Mocking “basically allows me to treat highly dependent code as if it were not dependent, without having to change the design. Perfect for legacy, perfect for learning, a real problem when you are trying to get design feedback. As soon as I remove the [mocking] tool then I am required to change the design and reduce the dependency and reduce the coupling. That’s what all the design literature is about.” (Watch the full talk here.) This is a good description of how mocking reduces the simplicity of the design, namely, by increasing coupling and increasing the cost of change.
-
 ### Mock Usage Trade-offs
 
 The use of mocks poses several challenges. Among all, a major problem is maintaining the behavior of the mock compatible with the original class. Furthermore, mocks may hide important design problems. Finally, while mocking may be the only way to test legacy systems, using them in such systems is not a straightforward task.
@@ -434,11 +406,10 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
  - Excessive use of mocking means the existence of lot of dependencies in the class - it is a smell in the code and a symptom of a badly designed class - If the production code estructure is well defined, we should use less mocks;
  - Good production code ease the process of testing and reduce the mock usage;
  - A problem when using mocks is maintaining the behavior of the mock compatible with the behavior of original class, especially when the class is poorly designed or highly coupled. As the production class tends to change often, the mock object becomes unstable and, as a consequence, more prone to change. 
- - Using mocks leads to violations of the DRY principle.
  - Using mocks makes refactoring harder.
  - Using mocks can reduce the simplicity of the design.
  - The unit tests become less realistic with mocks and that, as a consequence, (an important) part of their system was not being actually tested - However, we mus pay the price of writing integration tests for these dependencies have been mocked later on, to make sure these dependencies really work as expected - no part of the system can be missed by tests to assure they are working as expected;
- 
+
 
 ### Mock Recommendations
 
