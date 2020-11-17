@@ -437,6 +437,8 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
  - Using mocks leads to violations of the DRY principle.
  - Using mocks makes refactoring harder.
  - Using mocks can reduce the simplicity of the design.
+ - The unit tests become less realistic with mocks and that, as a consequence, (an important) part of their system was not being actually tested - However, we mus pay the price of writing integration tests for these dependencies have been mocked later on, to make sure these dependencies really work as expected - no part of the system can be missed by tests to assure they are working as expected;
+ 
 
 ### Mock Recommendations
 
