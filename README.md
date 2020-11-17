@@ -397,7 +397,7 @@ In some cases, different types of “test doubles” similar to mocks are more a
 
 ### The Costs of Mocking
 
-All of these reasons below are interrelated (and, you could argue, are just different ways of saying the same thing), but let’s take them one at a time.
+Mocking is a approach for handling dependencies while unit testing, but it comes at a cost. It is important to recognize these costs, so we can choose (carefully) when the benefits outweigh that cost and when they don’t.  There are 3 reasons to mock in a restricted or infrequent manner. All of these 3 reasons below are interrelated (and, you could argue, are just different ways of saying the same thing), but let’s take them one at a time.
 
  - Using mocks leads to violations of the DRY principle.
  - Using mocks makes refactoring harder.
