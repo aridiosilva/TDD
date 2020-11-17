@@ -395,7 +395,7 @@ Similarly, don’t mock value objects; there’s simply no reason to because the
 
 In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
 
-### Trade-offs using Mocks and Recommendations
+### Mock Usage Trade-offs
 
 The use of mocks poses several challenges. Among all, a major problem is maintaining the behavior of the mock compatible with the original class. Furthermore, mocks may hide important design problems. Finally, while mocking may be the only way to test legacy systems, using them in such systems is not a straightforward task.
 
@@ -417,6 +417,7 @@ The use of mocks in Unit Testing is a controversial topic (maybe less so now tha
  
 It is hard to decide what should be mocked and shouldn´t be mocked. But the extremes listed above not are good ones to follow. Below some points to consider when deciding what to mock: 
 
+- Gerard Meszaros in his Book suggests that components that make testing difficult are candidates to be mocked;
 - Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation” - as the test exercises the abstract behavior that is offered by the interface.;
 - Use less mocks as you can;
 - Do not mock final classes and static methods - since static method has everything you need to use it, so it defeats the purpose of mocking, and doing that is considered a bad practice;
