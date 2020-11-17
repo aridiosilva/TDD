@@ -422,7 +422,11 @@ It is hard to decide what should be mocked and shouldn´t be mocked. But the ext
 - Use less mocks as you can;
 - Do not mock static methods - since static method has everything you need to use it, so it defeats the purpose of mocking, and doing that is considered a bad practice;
 - The objective of the tests is to make sure things are working and that the new code doesn’t cause any problems with the existing code. We do not get this level of confidence if we have a test that mocks all its collaborators;
-- Should not mock the Unit under Test;
+- Should not mock the Unit under Test;00
+- Unless it is the unit under test, database dependencies are always mocked;
+- Complex and coupled classes should be mocked;
+- Do not often mock classes that they can fully control;
+- Mocking are mostly technical decision, such as dealing with unstable dependencies, the coupling between the mock and the production code, legacy systems, and hard-to-test classes are the most important ones;
 
 ### When To Use Mock Objects?
 
