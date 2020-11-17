@@ -451,7 +451,7 @@ The use of mocks in Unit Testing is a controversial topic (maybe less so now tha
 It is hard to decide what should be mocked and shouldn´t be mocked. But the extremes listed above not are good ones to follow. Below some points to consider when deciding what to mock: 
 
 - Gerard Meszaros in his Book suggests that components that make testing difficult are candidates to be mocked;
-- Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation” - as the test exercises the abstract behavior that is offered by the interface. Without the usage of a mock, developers would have to choose one out of the many possible implementations of the interface, making the test more coupled to the specific implementation.;
+- Mocking an interface rather than using one concrete implementation makes the test to become “independent of a specific implementation” - as the test exercises the abstract behavior that is offered by the interface. Without the usage of a mock, developers would have to choose one out of the many possible implementations of the interface, making the test more coupled to the specific implementation - by definition, interfaces don’t have any dependencies. Hence, they lend themselves to easy unit testing through object mocking;
 - Use less mocks as you can;
 - Do not mock static methods - since static method has everything you need to use it, so it defeats the purpose of mocking, and doing that is considered a bad practice;
 - The objective of the tests is to make sure things are working and that the new code doesn’t cause any problems with the existing code. We do not get this level of confidence if we have a test that mocks all its collaborators;
@@ -460,6 +460,7 @@ It is hard to decide what should be mocked and shouldn´t be mocked. But the ext
 - Complex and coupled classes should be mocked;
 - Do not often mock classes that they can fully control;
 - Mocking are mostly technical decision, such as dealing with unstable dependencies, the coupling between the mock and the production code, legacy systems, and hard-to-test classes are the most important ones;
+- Services generally depend on other services. Some ViewModels depend on services, especially container and factory-type services. Therefore, services are generally difficult to instantiate for testing because you need the full service tree. Abstract their essence into an interface. Then all references to services should be made through that interface so they can be easily mocked up for testing purposes;
 
 ### When To Use Mock Objects?
 
@@ -745,3 +746,27 @@ Mocking the library only mocks assumptions and makes your tests more brittle and
 ### Why "Fakes rather than Mocks"? 
 
 A fake is a kind of test double that may contain business behavior. Fakes are merely structs that fit an interface and are a form of dependency injection where we control the behavior. The major benefit of fakes are that they decrease coupling in code, where mocks increase coupling, and coupling makes refactoring harder. Fakes provide flexibility and allow for easy testing and refactoring. They reduce dependencies compared to mocks, and are easy to maintain. By writing simple fakes that adhere to the interfaces, we can see that we do not need mocks, mocking frameworks, or mock generators to create code designed for testing. We’ve also noted that unit testing is not everything, and you must write integration tests to ensure that systems are properly integrated with one another.
+
+## DAMP and DRY -  It's a balance, not a contradiction
+
+DAMP and DRY are not contradictory, rather they balance two different aspects of a code's maintainability. Maintainable code (code that is easy to change) is the ultimate goal here.
+
+- ***DAMP (Descriptive And Meaningful Phrases)*** promotes the readability of the code.
+
+    - To maintain code, you first need to understand the code. To understand it, you have to read it. Consider for a moment how much time you spend reading code. It's a lot. DAMP increases maintainability by reducing the time necessary to read and understand the code.
+
+- ***DRY (Don't repeat yourself) promotes the orthogonality of the code.***
+
+    - Removing duplication ensures that every concept in the system has a single authoritative representation in the code. A change to a single business concept results in a single change to the code. DRY increases maintainability by isolating change (risk) to only those parts of the system that must change.
+
+- ***So, why is duplication more acceptable in tests?***
+
+    - Tests often contain inherent duplication because they are testing the same thing over and over again, only with slightly different input values or setup code. However, unlike production code, this duplication is usually isolated only to the scenarios within a single test fixture/file. Because of this, the duplication is minimal and obvious, which means it poses less risk to the project than other types of duplication.
+
+     - Furthermore, removing this kind of duplication reduces the readability of the tests. The details that were previously duplicated in each test are now hidden away in some new method or class. To get the full picture of the test, you now have to mentally put all these pieces back together.
+
+     - Therefore, since test code duplication often carries less risk, and promotes readability, its easy to see how it is considered acceptable.
+
+ - ***As a principle, favor DRY in production code, favor DAMP in test code***. 
+ 
+     - While both are equally important, with a little wisdom you can tip the balance in your favor.
