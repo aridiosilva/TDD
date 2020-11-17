@@ -563,6 +563,8 @@ The developers of jMock are working on a new version which will use other techni
 
 - **PowerMock**
 
+     - framework that enables Java developers to mock certain classes that might be not possible without bytecode manipulation, e.g., final classes and static methods - in cases where the class under test is not designed for testability.
+
 - **JMockit** 
 
     - jMockit is designed to make the expectation descriptions as clear as possible.The core concepts of the jMock API are the mockery, mock objects, and expectations. 
