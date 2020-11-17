@@ -395,6 +395,12 @@ Similarly, don’t mock value objects; there’s simply no reason to because the
 
 In some cases, different types of “test doubles” similar to mocks are more appropriate instead. For a more detailed discussion about the differences between and applications for mocks, stubs, fakes, dummies, and other test doubles, check out Martin Fowler’s classic article on the topic.
 
+### Trade-offs using Mocks
+
+ - Mocks may reduce teste readability and be difficult to maintain;
+ - Execssive use of mocks is an indicative of poorly engineered code;
+ - 
+
 ### When To Use Mock Objects?
 
  In his 'Ode To Code' K Scott Allen offers rational for the use of mock objects when unit testing and discusses his thoughts on the use of mock object frameworks. Allen begins with a sharp argument to what's likely the most common misconception about mocks:
@@ -418,7 +424,7 @@ More generally, "test doubles [mocks] are useful when you want to isolate code u
 
   - 'A' uses 'B', 'A unit test' should break only if 'A' is broken, regardless of the condition of 'B'.
 
-## How exactly should unit tests be written without mocking extensively?
+### How exactly should unit tests be written without mocking extensively?
 
 By minimising side-effects in your code.
 
