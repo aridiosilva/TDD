@@ -419,8 +419,7 @@ The use of mocks in Unit Testing is a controversial topic (maybe less so now tha
    - Only mocking external dependencies (not all external dependencies should be mocked);
    - "no-mocks" policy;
  
- 
-!{When To Mock or Not](https://github.com/aridiosilva/TDD/blob/main/When_To_Mock_or_Not_AridioSilva.jpg)
+![When To Mock or Not](https://github.com/aridiosilva/TDD/blob/main/When_To_Mock_or_Not_AridioSilva.jpg)
  
 It is hard to decide what should be mocked and shouldn´t be mocked. But the extremes listed above not are good ones to follow. Below some points to consider when deciding what to mock: 
 
