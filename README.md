@@ -403,7 +403,7 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
  - Excessive use of mocks is an indicative of poorly engineered code;
  - Use of mocks does not guarantee that your code will behave as expected in production - You´ll be always guessing that what you mock will work (and keep working) that way when using the real objects;
  - I do not remember a single case in wich I found a bug using mocks;
- - Excessive use of mocking means the existence of lot of dependencies in the class - it is a smell in the code and a symptom of a badly designed class - If the production code estructure is well defined, we should use less mocks;
+ - Excessive use of mocking means the existence of lot of dependencies in the class - it is a smell in the code and a symptom of a badly designed class - If the production code structure is well defined, we should use less mocks;
  - Good production code ease the process of testing and reduce the mock usage;
  - A problem when using mocks is maintaining the behavior of the mock compatible with the behavior of original class, especially when the class is poorly designed or highly coupled. As the production class tends to change often, the mock object becomes unstable and, as a consequence, more prone to change. 
  - Using mocks makes refactoring harder.
