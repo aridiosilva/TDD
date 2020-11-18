@@ -408,8 +408,7 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
  - A problem when using mocks is maintaining the behavior of the mock compatible with the behavior of original class, especially when the class is poorly designed or highly coupled. As the production class tends to change often, the mock object becomes unstable and, as a consequence, more prone to change. 
  - Using mocks makes refactoring harder.
  - Using mocks can reduce the simplicity of the design.
- - The unit tests become less realistic with mocks and that, as a consequence, (an important) part of their system was not being actually tested - However, we mus pay the price of writing integration tests for these dependencies have been mocked later on, to make sure these dependencies really work as expected - no part of the system can be missed by tests to assure they are working as expected;
-
+ - The unit tests become less realistic with mocks and that, as a consequence, (an important) part of the production code will not being actually tested - However, we must pay the price of writing integration tests for these dependencies have been mocked later on, to make sure these dependencies really work as expected - no part of the production code can be missed by tests to assure they are working as expected;
 
 ### Mock Recommendations
 
