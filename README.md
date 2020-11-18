@@ -431,7 +431,7 @@ It is hard to decide what should be mocked and shouldn´t be mocked. But the ext
 - Should not mock the Unit under Test;00
 - Unless it is the unit under test, database dependencies are always mocked;
 - Complex and coupled classes should be mocked;
-- Do not often mock classes that they can fully control;
+- Do not often mock classes that you can have full control;
 - Mocking are mostly technical decision, such as dealing with unstable dependencies, the coupling between the mock and the production code, legacy systems, and hard-to-test classes are the most important ones;
 - Services generally depend on other services. Some ViewModels depend on services, especially container and factory-type services. Therefore, services are generally difficult to instantiate for testing because you need the full service tree. Abstract their essence into an interface. Then all references to services should be made through that interface so they can be easily mocked up for testing purposes;
 
