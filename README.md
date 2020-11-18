@@ -316,8 +316,6 @@ Developers targeting 100% code coverage are chasing the wrong metric.
   
   - **MOCKS** are what we are talking about here: objects pre-programmed with expectations which form a specification of the calls they are expected to receive. What makes a mock object different from the others is that it uses behavior verification. It means that the mock object verifies that it (the mock object) is being used correctly by the object under test. If the verification succeeds, it can be considered that the object under test will correctly use the real collaborator.
 
-
-
 ## TDD Cycle and the Need of Use of Mocks in Unit-Testing
 
 Unit testing is essential to produce good software. In consequence, I would claim that any Java developer knows (and uses) JUnit. As a unit test is intended to cover only a very small piece of code – in most cases a certain Java class – we want it to be independent of other classes. To achieve that we need to mock out these classes. In the Java world there are a couple of mocking frameworks around. 
@@ -337,6 +335,8 @@ These all defeat the whole purpose of unit tests being atomic, lightweight, and 
 - A mock is something like a place holder for a real object. It does provide the identical interface like the mocked object. However, calling a mock’s method will not have any effects. You can do asserts on desired invocations of a mock or define behaviour when a certain method is called (for example throw an exception).  
 
 - Mock objects allow you to set up test scenarios without bringing to bear large, unwieldy resources such as databases. Instead of calling a database for testing, you can simulate your database using a mock object in your unit tests.
+
+![Unit Test and Mock](https://github.com/aridiosilva/TDD/blob/main/Use_of_mocking_in_Unit_Testing.jpg)
 
 ### What dependencies to Develop Mocks?
 
