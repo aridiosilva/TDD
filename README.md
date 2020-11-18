@@ -413,7 +413,7 @@ The use of mocks poses several challenges. Among all, a major problem is maintai
 
 ### Mock Recommendations
 
-The use of mocks in Unit Testing is a controversial topic (maybe less so now than several years ago). By none of the following practices are good enought:
+The use of mocks in Unit Testing is a controversial topic (maybe less so now than several years ago). By none of the following practices are good enough:
 
    - Mocking almost every dependency (code smell);
    - Only mocking external dependencies (not all external dependencies should be mocked);
