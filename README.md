@@ -742,3 +742,16 @@ DAMP and DRY are not contradictory, rather they balance two different aspects of
  - ***As a principle, favor DRY in production code, favor DAMP in test code***. 
  
      - While both are equally important, with a little wisdom you can tip the balance in your favor.
+     
+  ## Design for Testability Patterns
+  
+Almost every piece of code depends on some other classes, objects, modules, or procedures. To unit-test a piece of code properly, we would like to isolate the code from its dependencies. This isolation is difficult to achieve if those dependencies are hard-coded in the form of literal classnames. As presented in the Book of Gerard Maszeros titled "xUnit Test Patterns: Refactoring Test Code", pubished in 2007 with 948 pages, there are four patterns to solve this problem:
+
+ - ***Dependency Injection** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
+ - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
+ - ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
+ - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
+ 
+ 
+  
+  
