@@ -749,18 +749,18 @@ Almost every piece of code depends on some other classes, objects, modules, or p
 
  - ***Dependency Injection** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
  
-       ![](https://github.com/aridiosilva/TDD/blob/main/Dependency_Injection_Pattern_Figure_Book_Maszeros.jpg)   
+ ![dependency injection](https://github.com/aridiosilva/TDD/blob/main/Dependency_Injection_Pattern_Figure_Book_Maszeros.jpg)   
  
   - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
   
-        ![](https://github.com/aridiosilva/TDD/blob/main/Dependency_Lookup_Pattern_Figure_Book_Maszeros.jpg) 
+ ![dependency lockup](https://github.com/aridiosilva/TDD/blob/main/Dependency_Lookup_Pattern_Figure_Book_Maszeros.jpg) 
    
  - ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
  
-        ![](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
+ ![humble object](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
   
  - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
  
-         ![](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
+ ![teste hook](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
   
   
