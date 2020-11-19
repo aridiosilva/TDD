@@ -772,5 +772,56 @@ testing fl ag that can be checked in the appropriate place.
 
  ![teste hook](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
   
+## DEPENDENCY INJECTION PATTERN FOR TESTING - REPLACING THE DEPENDENCY BY ON MOCK (OR TEST DOUBLE)
 
-     
+There are a number of different ways to tell the SUT to use the Test Double, but they all involve replacing a hard-coded name with a mechanism that determines the type
+of object to use at execution time. The three basic options are as follows:
+
+• ***Parameter Injection***: We pass the dependency directly to the SUT as we invoke it.
+• ***Constructor Injection***: We tell the SUT which DOC to use when we construct it.
+• ***Setter Injection***: We tell the SUT about the DOC sometime between when we construct it and when we exercise it.
+
+Each of these three variations of Dependency Injection can be hand-coded. Another option is to use an “Inversion of Control” (IoC) framework to link the various components together at runtime. This scheme avoids superfl uous diversity in how Dependency Injection is implemented across the application and can simplify the process of reconfi guring the application for different deployment models.
+
+### DEPENDENCY INJECTION by PARAMETER INJECTION
+
+- Parameter Injection is a form of Dependency Injection in which the SUT does not keep or initialize a reference to the DOC; instead, it is passed in as an argument of
+the method being called on the SUT. All clients of the SUT—whether they are tests or production code—supply the DOC. 
+
+- As a consequence, the SUT is more independent of the context because it makes no assumptions about the dependency other than its usage interface. The main drawback is that Parameter Injection forces the client to know about the dependency, which is more appropriate in some circumstances than in others. 
+
+- Most of the other variants of Dependency Injection move this knowledge somewhere other than the client or at least make it optional.
+
+- Parameter Injection is advocated by the original paper on Mock Objects. 
+
+- It is especially effective when we are doing true TDD because that’s when we have the greatest control over the design. 
+
+- It is possible to introduce Parameter Injection in an optional fashion by providing an alternative signature for the method in question with the extra parameter; we can then have the more traditional style method create the instance of the dependency and call the method that takes the dependency as a parameter.
+
+### DEPENDENCY INJECTION by CONSTRUCTOR INJECTION
+
+- Both Constructor Injection and Setter Injection involve storing a reference to the DOC as an attribute (fi eld or instance variable) of the SUT. With Dependency Injection, the fi eld is initialized from a constructor argument. 
+
+- The SUT may optionally provide a simpler constructor that calls this constructor with the value normally used in production. When a test wants to replace the real DOC with a Test Double, it passes in the Test Double to the constructor when it builds the SUT.
+
+- This approach to introducing Dependency Injection works well when the code includes only one or two constructors and they have small argument lists. 
+
+- Constructor Injection is the only approach that works if the DOC is an active object that creates its own thread of execution during construction; such behavior would make for Hard-to-Test Code (page 209), and we should probably consider turning it into a Humble Executable (see Humble Object on page 695). If we have a large number of dependencies as constructor arguments, we probably need to refactor the code to remove this code smell.
+
+### DEPENDENCY INJECTION by SETTER INJECTION
+
+- As with Constructor Injection, the SUT holds a reference to the DOC as an attribute (fi eld) that is initialized in the constructor. 
+
+- Where it differs is that the attribute is exposed to the client either as a public attribute or via a “setter” method. When a test wants to replace the real DOC with a Test Double, it assigns to the exposed attribute (or calls the setter with) an instance of the Test Double. 
+
+- This approach works well when constructing the real DOC has no unpleasant side effects and assuming that nothing can happen automatically between the constructor call and
+the point at which the test calls the setter for the property. 
+
+- Setter Injection cannot be used if the SUT performs any signifi cant processing in the constructor that relies on the dependency. In that case, we must use Constructor Injection. 
+
+- If constructing the real DOC has deleterious side effects, we can avoid creating it via the constructor by modifying the SUT to use Lazy Initialization [SBPP] to instantiate the DOC the fi rst time the SUT needs to use it.
+
+
+
+
+ 
