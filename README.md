@@ -755,7 +755,7 @@ Almost every piece of code depends on some other classes, objects, modules, or p
  
 - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
   
- - HOW IT WORKS: We avoid hard-coding the names of classes on which the SUT depends into our code because static binding severely limits our options regarding how the software is confi gured as it runs. Instead, we hard-code that name of a “component broker” that returns a ready-to-use object. The component broker provides some means for the client software or perhaps a system confi guration manager to tell the SUT in question which objects to use for each component request.
+  - HOW IT WORKS: We avoid hard-coding the names of classes on which the SUT depends into our code because static binding severely limits our options regarding how the software is confi gured as it runs. Instead, we hard-code that name of a “component broker” that returns a ready-to-use object. The component broker provides some means for the client software or perhaps a system confi guration manager to tell the SUT in question which objects to use for each component request.
   
  ![dependency lockup](https://github.com/aridiosilva/TDD/blob/main/Dependency_Lookup_Pattern_Figure_Book_Maszeros.jpg) 
    
