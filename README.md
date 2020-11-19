@@ -745,13 +745,22 @@ DAMP and DRY are not contradictory, rather they balance two different aspects of
      
   ## Design for Testability Patterns
   
-Almost every piece of code depends on some other classes, objects, modules, or procedures. To unit-test a piece of code properly, we would like to isolate the code from its dependencies. This isolation is difficult to achieve if those dependencies are hard-coded in the form of literal classnames. As presented in the Book of Gerard Maszeros titled "xUnit Test Patterns: Refactoring Test Code", pubished in 2007 with 948 pages, there are four patterns to solve this problem:
+Almost every piece of code depends on some other classes, objects, modules, or procedures. To unit-test a piece of code properly, we would like to isolate the code from its dependencies. This isolation is difficult to achieve if those dependencies are hard-coded in the form of literal classnames. As presented in the Book of Gerard Maszeros titled "xUnit Test Patterns: Refactoring Test Code", pubished in 2007 with 948 pages, there are four patterns to deal with this problem and area ways to provide a means to substitute a depended-on component (DOC) to make it easy to use a Test Double(mock, etc.) while testing our code:
 
  - ***Dependency Injection** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
- - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
+ 
+       ![](https://github.com/aridiosilva/TDD/blob/main/Dependency_Injection_Pattern_Figure_Book_Maszeros.jpg)   
+ 
+  - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
+  
+        ![](https://github.com/aridiosilva/TDD/blob/main/Dependency_Lookup_Pattern_Figure_Book_Maszeros.jpg) 
+   
  - ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
+ 
+        ![](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
+  
  - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
  
- 
+         ![](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
   
   
