@@ -761,15 +761,16 @@ Almost every piece of code depends on some other classes, objects, modules, or p
    
 - ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
  
- ![humble object](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
- 
   - HOW IT WORKS: We extract all the logic from the hard-to-test component into a component that is testable via synchronous tests. This component implements a service interface consisting of methods that expose the logic of the untestable component; the only difference is that these methods are accessible via synchronous method calls. As a result, the Humble Object component becomes a very thin adapter layer that contains very little code. Each time the framework calls the Humble Object, this object delegates its responsibilities to the testable component. If the testable component needs any information from the context, the Humble Object is responsible for retrieving it and passing it to the testable component. The Humble Object code is typically so simple that we often don’t bother writing tests for it because it can be quite diffi cult to set up the environment needed to run those tests.
-  
+
+![humble object](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
+
 - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
+
+- HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
+testing fl ag that can be checked in the appropriate place. 
 
  ![teste hook](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
   
-  - HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
-testing fl ag that can be checked in the appropriate place. 
-     
+
      
