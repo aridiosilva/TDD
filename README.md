@@ -747,31 +747,29 @@ DAMP and DRY are not contradictory, rather they balance two different aspects of
   
 Almost every piece of code depends on some other classes, objects, modules, or procedures. To unit-test a piece of code properly, we would like to isolate the code from its dependencies. This isolation is difficult to achieve if those dependencies are hard-coded in the form of literal classnames. As presented in the Book of Gerard Maszeros titled "xUnit Test Patterns: Refactoring Test Code", pubished in 2007 with 948 pages, there are four patterns to deal with this problem and area ways to provide a means to substitute a depended-on component (DOC) to make it easy to use a Test Double(mock, etc.) while testing our code:
 
- - ***Dependency Injection** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing. 
+- ***Dependency Injection** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing. 
  
-     -  HOW IT WORKS: We avoid hard-coding the names of classes on which we depend into our code by providing some other means for the client or system confi guration to tell the SUT which objects to use for each dependency as it is executed. As part of the design of the SUT, we arrange to pass the dependency in to the SUT through the “front door.” That is, the means to specify the dependency becomes part of the API of the SUT. We can include it as an argument with each method call, include it on the constructor, or make it a settable attribute (property).
+  - HOW IT WORKS: We avoid hard-coding the names of classes on which we depend into our code by providing some other means for the client or system confi guration to tell the SUT which objects to use for each dependency as it is executed. As part of the design of the SUT, we arrange to pass the dependency in to the SUT through the “front door.” That is, the means to specify the dependency becomes part of the API of the SUT. We can include it as an argument with each method call, include it on the constructor, or make it a settable attribute (property).
  
  ![dependency injection](https://github.com/aridiosilva/TDD/blob/main/Dependency_Injection_Pattern_Figure_Book_Maszeros.jpg)   
  
-  - ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
+- ***Dependency Lookup*** is a way to allow the normal coupling between a SUT(System Under Testing) and its dependencies to be broken during automated testing;
   
-     - HOW IT WORKS: We avoid hard-coding the names of classes on which the SUT depends into our code because static binding severely limits our options regarding how the software is confi gured as it runs. Instead, we hard-code that name of a “component broker” that returns a ready-to-use object. The component broker provides some means for the client software or perhaps a system confi guration manager to tell the SUT in question which objects to use for each component request.
+ - HOW IT WORKS: We avoid hard-coding the names of classes on which the SUT depends into our code because static binding severely limits our options regarding how the software is confi gured as it runs. Instead, we hard-code that name of a “component broker” that returns a ready-to-use object. The component broker provides some means for the client software or perhaps a system confi guration manager to tell the SUT in question which objects to use for each component request.
   
  ![dependency lockup](https://github.com/aridiosilva/TDD/blob/main/Dependency_Lookup_Pattern_Figure_Book_Maszeros.jpg) 
-     
-
    
- - ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
+- ***Humble Object*** is a way to bring the logic of these hard-to-instantiate objects under test in a cost-effective manner;
  
  ![humble object](https://github.com/aridiosilva/TDD/blob/main/Humble_Object_Pattern_Figure_Book_Maszeros.jpg) 
  
-    - HOW IT WORKS: We extract all the logic from the hard-to-test component into a component that is testable via synchronous tests. This component implements a service interface consisting of methods that expose the logic of the untestable component; the only difference is that these methods are accessible via synchronous method calls. As a result, the Humble Object component becomes a very thin adapter layer that contains very little code. Each time the framework calls the Humble Object, this object delegates its responsibilities to the testable component. If the testable component needs any information from the context, the Humble Object is responsible for retrieving it and passing it to the testable component. The Humble Object code is typically so simple that we often don’t bother writing tests for it because it can be quite diffi cult to set up the environment needed to run those tests.
+  - HOW IT WORKS: We extract all the logic from the hard-to-test component into a component that is testable via synchronous tests. This component implements a service interface consisting of methods that expose the logic of the untestable component; the only difference is that these methods are accessible via synchronous method calls. As a result, the Humble Object component becomes a very thin adapter layer that contains very little code. Each time the framework calls the Humble Object, this object delegates its responsibilities to the testable component. If the testable component needs any information from the context, the Humble Object is responsible for retrieving it and passing it to the testable component. The Humble Object code is typically so simple that we often don’t bother writing tests for it because it can be quite diffi cult to set up the environment needed to run those tests.
   
- - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
- 
+- ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
+
  ![teste hook](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
   
-     - HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
+  - HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
 testing fl ag that can be checked in the appropriate place. 
      
      
