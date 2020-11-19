@@ -767,7 +767,7 @@ Almost every piece of code depends on some other classes, objects, modules, or p
 
 - ***Test Hook*** is a “method of last resort” for introducing test-specific behavior during automated testing;
 
-- HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
+  - HOW IT WORKS: We modify the behavior of the SUT to support testing by putting a hook directly into the SUT or into a DOC. This approach implies that we use some kind of
 testing fl ag that can be checked in the appropriate place. 
 
  ![teste hook](https://github.com/aridiosilva/TDD/blob/main/Test_hook_Pattern_Figure_Book_Maszeros.jpg) 
