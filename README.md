@@ -777,9 +777,9 @@ testing fl ag that can be checked in the appropriate place.
 There are a number of different ways to tell the SUT to use the Test Double, but they all involve replacing a hard-coded name with a mechanism that determines the type
 of object to use at execution time. The three basic options are as follows:
 
-• ***Parameter Injection***: We pass the dependency directly to the SUT as we invoke it.
-• ***Constructor Injection***: We tell the SUT which DOC to use when we construct it.
-• ***Setter Injection***: We tell the SUT about the DOC sometime between when we construct it and when we exercise it.
+- ***Parameter Injection***: We pass the dependency directly to the SUT as we invoke it.
+- ***Constructor Injection***: We tell the SUT which DOC to use when we construct it.
+- ***Setter Injection***: We tell the SUT about the DOC sometime between when we construct it and when we exercise it.
 
 Each of these three variations of Dependency Injection can be hand-coded. Another option is to use an “Inversion of Control” (IoC) framework to link the various components together at runtime. This scheme avoids superfl uous diversity in how Dependency Injection is implemented across the application and can simplify the process of reconfi guring the application for different deployment models.
 
