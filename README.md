@@ -823,7 +823,47 @@ the point at which the test calls the setter for the property.
 
 - If constructing the real DOC has deleterious side effects, we can avoid creating it via the constructor by modifying the SUT to use Lazy Initialization [SBPP] to instantiate the DOC the fi rst time the SUT needs to use it.
 
+# Google Testing on the Toilet: Separation of Concerns? That's a Wrap! 
 
+This text was adapted from a Google Testing on the Toilet (TotT) episode. You can download a printer-friendly version of this TotT episode and post it in your office, written by  Stefan Kennedy. The following function decodes a byte array as an image using an API named SpeedyImg. What maintenance problems might arise due to referencing an API owned by a different team?
 
+```java
+SpeedyImgImage decodeImage(List<SpeedyImgDecoder> decoders, byte[] data) {
+  SpeedyImgOptions options = getDefaultConvertOptions();
+  for (SpeedyImgDecoder decoder : decoders) {
+    SpeedyImgResult decodeResult = decoder.decode(decoder.formatBytes(data));
+    SpeedyImgImage image = decodeResult.getImage(options);
+    if (validateGoodImage(image)) { return image; }
+  }
+  throw new RuntimeException();
+}
+```
+
+Details about how to call the API are mixed with domain logic, which can make the code harder to understand. For example, the call to decoder.formatBytes() is required by the API, but how the bytes are formatted isn’t relevant to the domain logic.
+
+Additionally, if this API is used in many places across a codebase, then all usages may need to change if the way the API is used changes. For example, if the return type of this function is changed to the more generic SpeedyImgResult type, usages of SpeedyImgImage would need to be updated.
+
+To avoid these maintenance problems, create wrapper types to hide API details behind an abstraction:
+
+```java
+Image decodeImage(List<ImageDecoder> decoders, byte[] data) {
+  for (ImageDecoder decoder : decoders) {
+    Image decodedImage = decoder.decode(data);
+    if (validateGoodImage(decodedImage)) { return decodedImage; }
+  }
+  throw new RuntimeException();
+}
+```
+
+Wrapping an external API follows the Separation of Concerns principle, since the logic for how the API is called is separated from the domain logic. This has many benefits, including:
+
+ -	If the way the API is used changes, encapsulating the API in a wrapper insulates how far those changes can propagate across your codebase.
+ -	You can modify the interface or the implementation of types you own, but you can’t for API types.
+ -	It is easier to switch or add another API, since they can still be represented by the introduced types (e.g. ImageDecoder/Image).
+ - Readability can improve as you don’t need to sift through API code to understand core logic.
+
+Not all external APIs need to be wrapped. For example, if an API would take a huge effort to separate or is simple enough that it doesn't pollute the codebase, it may be better not to introduce wrapper types (e.g. library types like List in Java or std::vector in C++). When in doubt, keep in mind that a wrapper should only be added if it will clearly improve the code (see the YAGNI principle).
+
+“Separation of Concerns” in the context of external APIs is also described by Martin Fowler in his blog post, Refactoring code that accesses external services. 
 
  
