@@ -613,7 +613,7 @@ The developers of jMock are working on a new version which will use other techni
     - mock objects stand in for the real neighbors of the object under test while the test runs; and 
     - expectations describe how the object under test should invoke its neighbors during the test. 
 
-## Confusing betwen Stubs and Mocks
+## Confusing between Stubs and Mocks
 
 In the Article "MOcks Aren´t Stubs" (https://martinfowler.com/articles/mocksArentStubs.html), the author Martin Fowler, states that:
 
