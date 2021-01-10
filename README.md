@@ -1448,7 +1448,7 @@ public class OrderTest5 {
         this.println(&quot;@Test test2()&quot;);
     }
 }
-``´
+```
 
 The test run shows the ClassRule kick in at the start and end of the test case:
 
@@ -1516,12 +1516,12 @@ OrderTest1 @Test test2()
 
 Method execution order starts with the given test case and goes up the super class chain until you get to the top of the hierarchy.
 
-Subclassing test cases with managed resources
-Here, things get trickier.
+### Subclassing test cases with managed resources 
 
-The order of @Before methods goes from the top to the bottom of the hierarchy: parent, child, child of child.
+Here, things get trickier:
 
-The order of @After methods goes from the bottom to the top of the hierarchy: child of child, child, parent.
+* The order of *@Before methods* goes from the top to the bottom of the hierarchy: parent, child, child of child.
+* The order of *@After methods* goes from the bottom to the top of the hierarchy: child of child, child, parent.
 
 For example:
 
@@ -1642,19 +1642,6 @@ If you add a third level with a SubSubOrderTest2 class extending SubOrderTest2, 
 ```
 
 This demonstrates the power of *JUnit rules*. With the *new ClassRule* in *JUnit 4.9*, *rules can finally be used full strength*.
-
-
-
-
-
-
-
-
-
-
-
-
- 
  
 ## Design for Testability Patterns
   
