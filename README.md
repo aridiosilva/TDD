@@ -869,6 +869,655 @@ In the followinf json code we have an example of the *current_message_multi_devi
 }
 ```
 
+## Understanding JUnit method order execution
+
+With the addition of the *ClassRule annotation* in *JUnit 4.9*, can be controled the JUnit test order execution.
+
+*@ClassRule* fills a gap in the *JUnit API*, by providing *class level rules* like *@BeforeClass* and *@AfterClass* provide *class-wide* **set up** and **tear down**.
+
+This sessiona explains how to control code execution of unit tests and where @ClassRule fits in.
+
+The terminology used is:
+
+* A test implements @Test
+* A test case in a class with @Test methods
+
+### Ordering test methods
+
+The simplest test case you can write in JUnit is to annotate methods with @Test:
+
+```java 
+package test;
+import org.junit.Test;
+ 
+public class OrderTest1 {
+    @Test
+    public void test1() {
+        println(&quot;@Test test1()&quot;);
+    }
+    @Test
+    public void test2() {
+        println(&quot;@Test test2()&quot;);
+    }
+    private void println(String string) {
+        OrderTestUtils.println(OrderTest1.class, string);
+    }
+}
+```
+
+In OrderTest1, the execution order is:
+
+``´java
+OrderTest1 @Test test1()
+OrderTest1 @Test test2()
+```
+
+### Managing test fixtures
+
+If you need to initialize the same data for each test, you put that data in instance variables and initialize them in a @Before setUp method. The setUp method is called before each @Test method.
+
+One test invocation becomes the following call sequence:
+
+```java
+Call @Before setUp
+Call one @Test method
+```
+
+If that data needs to be cleaned up, implement an @After tearDown method. The tearDown method is called after each @Test method.
+
+One test invocation becomes the following call sequence:
+
+```java 
+Call @Before setUp
+Call one @Test method
+Call @After tearDown
+The call sequence for a class with two test methods is:
+
+Call @Before setUp
+Call @Test method test1
+Call @After tearDown
+Call @Before setUp
+Call @Test method test2
+Call @After tearDown
+```
+
+For example:
+
+```java 
+package test;
+ 
+import java.io.Closeable;
+import java.io.IOException;
+ 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+ 
+public class OrderTest2 {
+ 
+    static class ManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    private ManagedResource managedResource;
+ 
+    private void println(String string) {
+        OrderTestUtils.println(OrderTest2.class, string);
+    } 
+    @Before
+    public void setUp() {
+        this.println(&quot;@Before setUp&quot;);
+        this.managedResource = new ManagedResource();
+    } 
+    @After
+    public void tearDown() throws IOException {
+        this.println(&quot;@After tearDown&quot;);
+        this.managedResource.close();
+        this.managedResource = null;
+    } 
+    @Test
+    public void test1() {
+        this.println(&quot;@Test test1()&quot;);
+    } 
+    @Test
+    public void test2() {
+        this.println(&quot;@Test test2()&quot;);
+    }
+}
+```
+
+In OrderTest2, the execution order is:
+
+```java
+OrderTest2 @Before setUp
+OrderTest2 @Test test1()
+OrderTest2 @After tearDown
+OrderTest2 @Before setUp
+OrderTest2 @Test test2()
+OrderTest2 @After tearDown
+```
+
+### Managing expensive test fixtures
+
+When a resource is expensive to manage like a connection to a server, a database, or even managing an embedded server, it’s best to only initialize that resource once for the whole test case. You want to avoid starting and stopping a server for each @Test method. Instead, initialize the server once for all the tests in the class.
+
+To do so, we use @BeforeClass and @AfterClass methods, instead of @Before and @After to get the following call sequence:
+
+```java
+Call @BeforeClass setUpClass
+Call @Test method test1
+Call @Test method test2
+Call @AfterClass tearDownClass
+```
+
+Let’s add class-level set up and tear down to our example:
+
+```java
+package test;
+ 
+import java.io.Closeable;
+import java.io.IOException;
+ 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+ 
+public class OrderTest3 {
+ 
+    static class ExpensiveManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    static class ManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    } 
+    @BeforeClass
+    public static void setUpClass() {
+        OrderTestUtils.println(OrderTest3.class, &quot;@BeforeClass setUpClass&quot;);
+        MyExpensiveManagedResource = new ExpensiveManagedResource();
+    } 
+    @AfterClass
+    public static void tearDownClass() throws IOException {
+        OrderTestUtils.println(OrderTest3.class, &quot;@AfterClass tearDownClass&quot;);
+        MyExpensiveManagedResource.close();
+        MyExpensiveManagedResource = null;
+    }
+ 
+    private ManagedResource myManagedResource;
+    private static ExpensiveManagedResource MyExpensiveManagedResource;
+ 
+    private void println(String string) {
+        OrderTestUtils.println(OrderTest3.class, string);
+    } 
+    @Before
+    public void setUp() {
+        this.println(&quot;@Before setUp&quot;);
+        this.myManagedResource = new ManagedResource();
+    } 
+    @After
+    public void tearDown() throws IOException {
+        this.println(&quot;@After setUp&quot;);
+        this.myManagedResource.close();
+        this.myManagedResource = null;
+    } 
+    @Test
+    public void test1() {
+        this.println(&quot;@Test test1()&quot;);
+    } 
+    @Test
+    public void test2() {
+        this.println(&quot;@Test test2()&quot;);
+    }
+}
+```
+
+
+In OrderTest3, the execution order is:
+
+```java
+OrderTestAll @BeforeClass setUpClass
+OrderTestAll @Before setUp
+OrderTestAll @Test test1()
+OrderTestAll @After setUp
+OrderTestAll @Before setUp
+OrderTestAll @Test test2()
+OrderTestAll @After setUp
+OrderTestAll @AfterClass tearDownClass
+```
+
+You can see that the setUpClass and tearDownClass wrap the execution of this test case.
+
+## Managing resources with rules
+
+Instead of duplicating resource management code in each class, you can reuse your code, but instead of putting this common code in a superclass for all your tests. you can abstract external resource management with a JUnit Rule.
+
+*JUnit rules* are *subclasses of* the *ExternalResource class*.
+
+Let’s do it both ways and compare.
+
+``´java
+package test;
+ 
+import java.io.Closeable;
+import java.io.IOException;
+ 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExternalResource;
+ 
+public class OrderTest4 {
+ 
+    static class ExpensiveExternalResource extends ExternalResource {
+ 
+        ExpensiveExternalResource() {
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;constructor&quot;);
+        } 
+        @Override
+        protected void after() {
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;after&quot;);
+        } 
+        @Override
+        protected void before() throws Throwable {
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;before&quot;);
+        }
+    }
+ 
+    static class ExpensiveManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    static class ManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    @BeforeClass
+    public static void setUpClass() {
+        OrderTestUtils.println(OrderTest4.class, &quot;@BeforeClass setUpClass&quot;);
+        MyExpensiveManagedResource = new ExpensiveManagedResource();
+    } 
+    @AfterClass
+    public static void tearDownClass() throws IOException {
+        OrderTestUtils.println(OrderTest4.class, &quot;@AfterClass tearDownClass&quot;);
+        MyExpensiveManagedResource.close();
+        MyExpensiveManagedResource = null;
+    }
+    
+    @Rule
+    public ExternalResource resource = new ExpensiveExternalResource();
+ 
+    private ManagedResource myManagedResource;
+ 
+    private static ExpensiveManagedResource MyExpensiveManagedResource;
+ 
+    private void println(String string) {
+        OrderTestUtils.println(OrderTest4.class, string);
+    }
+ 
+    @Before
+    public void setUp() {
+        this.println(&quot;@Before setUp&quot;);
+        this.myManagedResource = new ManagedResource();
+    } 
+    @After
+    public void tearDown() throws IOException {
+        this.println(&quot;@After tearDown()&quot;);
+        this.myManagedResource.close();
+        this.myManagedResource = null;
+    } 
+    @Test
+    public void test1() {
+        this.println(&quot;@Test test1()&quot;);
+    } 
+    @Test
+    public void test2() {
+        this.println(&quot;@Test test2()&quot;);
+    }
+}
+```
+The methods are run in the following order:
+
+```java 
+OrderTest4 @BeforeClass setUpClass
+ExpensiveExternalResource constructor
+ExpensiveExternalResource before
+OrderTest4 @Before setUp
+OrderTest4 @Test test1()
+OrderTest4 @After setUp
+ExpensiveExternalResource after
+ExpensiveExternalResource constructor
+ExpensiveExternalResource before
+OrderTest4 @Before setUp
+OrderTest4 @Test test2()
+OrderTest4 @After setUp
+ExpensiveExternalResource after
+OrderTest4 @AfterClass tearDownClass
+The ExternalResource before method is called just before the @Before setUp method.
+```
+
+The ExternalResource after method is called just before the @After setUp method.
+
+An ExternalResource is a nice way to abstract out and resuse your resource management code. You can now compose use of your resources instead of  subclassing.
+
+Managing expensive resources with rules
+Just like you can wrap a test case with @BeforeClass and @AfterClass, there was no way to do this with rules until JUnit 4.9 and the ClassRule annotation.
+
+The following examples shows a ClassRule at work. Deltas from the previous example are highlighted.
+
+```java
+package test;
+ 
+import java.io.Closeable;
+import java.io.IOException;
+ 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExternalResource;
+ 
+public class OrderTest5 {
+ 
+    static class ExpensiveExternalResource extends ExternalResource {
+ 
+        private final String info;
+ 
+        ExpensiveExternalResource(String info) {
+            this.info = info;
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;constructor &quot; + info);
+        } 
+        @Override
+        protected void after() {
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;after &quot; + this.info);
+        } 
+        @Override
+        protected void before() throws Throwable {
+            OrderTestUtils.println(ExpensiveExternalResource.class, &quot;before &quot; + this.info);
+        }
+    }
+    
+    static class ExpensiveManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    static class ManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+ 
+    @BeforeClass
+    public static void setUpClass() {
+        OrderTestUtils.println(OrderTest5.class, &quot;@BeforeClass setUpClass&quot;);
+        MyExpensiveManagedResource = new ExpensiveManagedResource();
+    }
+ 
+    @AfterClass
+    public static void tearDownClass() throws IOException {
+        OrderTestUtils.println(OrderTest5.class, &quot;@AfterClass tearDownClass&quot;);
+        MyExpensiveManagedResource.close();
+        MyExpensiveManagedResource = null;
+    }
+ 
+    @Rule
+    public ExternalResource resource = new ExpensiveExternalResource(&quot;instance&quot;);
+ 
+    @ClassRule
+    public static ExternalResource StaticResource = new ExpensiveExternalResource(&quot;static&quot;);
+ 
+    private ManagedResource myManagedResource;
+ 
+    private static ExpensiveManagedResource MyExpensiveManagedResource;
+ 
+    private void println(String string) {
+        OrderTestUtils.println(OrderTest5.class, string);
+    } 
+    @Before
+    public void setUp() {
+        this.println(&quot;@Before setUp&quot;);
+        this.myManagedResource = new ManagedResource();
+    } 
+    @After
+    public void tearDown() throws IOException {
+        this.println(&quot;@After tearDown()&quot;);
+        this.myManagedResource.close();
+        this.myManagedResource = null;
+    } 
+    @Test
+    public void test1() {
+        this.println(&quot;@Test test1()&quot;);
+    } 
+    @Test
+    public void test2() {
+        this.println(&quot;@Test test2()&quot;);
+    }
+}
+``´
+
+The test run shows the ClassRule kick in at the start and end of the test case:
+
+```java
+ExpensiveExternalResource constructor static
+ExpensiveExternalResource before static
+OrderTest5 @BeforeClass setUpClass
+ExpensiveExternalResource constructor instance
+ExpensiveExternalResource before instance
+OrderTest5 @Before setUp
+OrderTest5 @Test test1()
+OrderTest5 @After tearDown()
+ExpensiveExternalResource after instance
+ExpensiveExternalResource constructor instance
+ExpensiveExternalResource before instance
+OrderTest5 @Before setUp
+OrderTest5 @Test test2()
+OrderTest5 @After tearDown()
+ExpensiveExternalResource after instance
+OrderTest5 @AfterClass tearDownClass
+ExpensiveExternalResource after static
+Subclassing test cases
+```
+
+What happens when you subclass a test case? For example:
+
+```java 
+package test;
+import org.junit.Test;
+ 
+public class SubOrderTest1 extends OrderTest1 {
+ 
+    private void println(String string) {
+        OrderTestUtils.println(SubOrderTest1.class, string);
+    }
+    @Test
+    public void testSub1() {
+        this.println(&quot;@Test testSub1()&quot;);
+    }
+    @Test
+    public void testSub2() {
+        this.println(&quot;@Test testSub1()&quot;);
+    }
+}
+```
+
+JUnit runs the given test case and then the super class test case:
+
+```java
+SubOrderTest1 @Test testSub1()
+SubOrderTest1 @Test testSub1()
+OrderTest1 @Test test1()
+OrderTest1 @Test test2()
+```
+If you add a third level with a SubSubOrderTest1 class extending SubOrderTest1, you get:
+
+```java
+SubSubOrderTest1 @Test testSubSub1()
+SubSubOrderTest1 @Test testSubSub1()
+SubOrderTest1 @Test testSub1()
+SubOrderTest1 @Test testSub1()
+OrderTest1 @Test test1()
+OrderTest1 @Test test2()
+```
+
+Method execution order starts with the given test case and goes up the super class chain until you get to the top of the hierarchy.
+
+Subclassing test cases with managed resources
+Here, things get trickier.
+
+The order of @Before methods goes from the top to the bottom of the hierarchy: parent, child, child of child.
+
+The order of @After methods goes from the bottom to the top of the hierarchy: child of child, child, parent.
+
+For example:
+
+```java
+package test;
+ 
+import java.io.Closeable;
+import java.io.IOException;
+ 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+ 
+public class SubOrderTest2 extends OrderTest2 {
+ 
+    static class ManagedResource implements Closeable {
+        @Override
+        public void close() throws IOException {
+        }
+    }
+    private ManagedResource managedResource;
+ 
+    private void println(String string) {
+        OrderTestUtils.println(SubOrderTest2.class, string);
+    }
+    @Before
+    public void setUpSub() {
+        this.println(&quot;@Before setUpSub&quot;);
+        this.managedResource = new ManagedResource();
+    }
+    @After
+    public void tearDownSub() throws IOException {
+        this.println(&quot;@After tearDownSub&quot;);
+        this.managedResource.close();
+        this.managedResource = null;
+    }
+    @Test
+    public void testSub1() {
+        this.println(&quot;@Test testSub1()&quot;);
+    }
+    @Test
+    public void testSub2() {
+        this.println(&quot;@Test testSub2()&quot;);
+    }
+}
+```
+
+Here, JUnit runs the given test case and then the super class test case:
+
+```java
+1 OrderTest2 @Before setUp
+2 SubOrderTest2 @Before setUpSub
+3 SubOrderTest2 @Test testSub1()
+4 SubOrderTest2 @After tearDownSub
+5 OrderTest2 @After tearDown
+6 OrderTest2 @Before setUp
+7 SubOrderTest2 @Before setUpSub
+8 SubOrderTest2 @Test testSub2()
+9 SubOrderTest2 @After tearDownSub
+10 OrderTest2 @After tearDown
+11 OrderTest2 @Before setUp
+12 SubOrderTest2 @Before setUpSub
+13 OrderTest2 @Test test1()
+14 SubOrderTest2 @After tearDownSub
+15 OrderTest2 @After tearDown
+16 OrderTest2 @Before setUp
+17 SubOrderTest2 @Before setUpSub
+18 OrderTest2 @Test test2()
+19 SubOrderTest2 @After tearDownSub
+20 OrderTest2 @After tearDown
+```
+
+If you add a third level with a SubSubOrderTest2 class extending SubOrderTest2, you get:
+
+```java
+1 OrderTest2 @Before setUp
+2 SubOrderTest2 @Before setUpSub
+3 SubSubOrderTest2 @Before setUpSubSub
+4 SubSubOrderTest2 @Test testSubSub1()
+5 SubSubOrderTest2 @After tearDownSubSub
+6 SubOrderTest2 @After tearDownSub
+7 OrderTest2 @After tearDown
+8 OrderTest2 @Before setUp
+9 SubOrderTest2 @Before setUpSub
+10 SubSubOrderTest2 @Before setUpSubSub
+11 SubSubOrderTest2 @Test testSubSub2()
+12 SubSubOrderTest2 @After tearDownSubSub
+13 SubOrderTest2 @After tearDownSub
+14 OrderTest2 @After tearDown
+15 OrderTest2 @Before setUp
+16 SubOrderTest2 @Before setUpSub
+17 SubSubOrderTest2 @Before setUpSubSub
+18 SubOrderTest2 @Test testSub1()
+19 SubSubOrderTest2 @After tearDownSubSub
+20 SubOrderTest2 @After tearDownSub
+21 OrderTest2 @After tearDown
+22 OrderTest2 @Before setUp
+23 SubOrderTest2 @Before setUpSub
+24 SubSubOrderTest2 @Before setUpSubSub
+25 SubOrderTest2 @Test testSub2()
+26 SubSubOrderTest2 @After tearDownSubSub
+27 SubOrderTest2 @After tearDownSub
+28 OrderTest2 @After tearDown
+29 OrderTest2 @Before setUp
+30 SubOrderTest2 @Before setUpSub
+31 SubSubOrderTest2 @Before setUpSubSub
+32 OrderTest2 @Test test1()
+33 SubSubOrderTest2 @After tearDownSubSub
+34 SubOrderTest2 @After tearDownSub
+35 OrderTest2 @After tearDown
+36 OrderTest2 @Before setUp
+37 SubOrderTest2 @Before setUpSub
+38 SubSubOrderTest2 @Before setUpSubSub
+39 OrderTest2 @Test test2()
+40 SubSubOrderTest2 @After tearDownSubSub
+41 SubOrderTest2 @After tearDownSub
+42 OrderTest2 @After tearDown
+```
+
+This demonstrates the power of *JUnit rules*. With the *new ClassRule* in *JUnit 4.9*, *rules can finally be used full strength*.
+
+
+
+
+
+
+
+
+
+
+
+
  
  
 ## Design for Testability Patterns
