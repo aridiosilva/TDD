@@ -877,9 +877,9 @@ server.setDispatcher(dispatcher);
 
 ### Download
 
-    ![link - github](https://github.com/square/okhttp/tree/master/mockwebserver)
+*  (https://github.com/square/okhttp/tree/master/mockwebserver)
     
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
+  testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
 
      
 # Test fixtures
