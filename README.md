@@ -886,7 +886,7 @@ The terminology used is:
 
 The *simplest test case* you can write in *JUnit( is to *annotate methods* with *@Test*:
 
-```java 
+```java
 package test;
 import org.junit.Test;
  
@@ -907,7 +907,7 @@ public class OrderTest1 {
 
 In *OrderTest1*, the *execution order* is:
 
-``´java
+```java
 OrderTest1 @Test test1()
 OrderTest1 @Test test2()
 ```
@@ -1082,8 +1082,7 @@ public class OrderTest3 {
 }
 ```
 
-
-In OrderTest3, the execution order is:
+In *OrderTest3*, the *execution order* is:
 
 ```java
 OrderTestAll @BeforeClass setUpClass
@@ -1106,7 +1105,7 @@ Instead of duplicating resource management code in each class, you can reuse you
 
 Let’s do it both ways and compare.
 
-``´java
+```java
 package test;
  
 import java.io.Closeable;
@@ -1147,8 +1146,7 @@ public class OrderTest4 {
         @Override
         public void close() throws IOException {
         }
-    }
- 
+    } 
     @BeforeClass
     public static void setUpClass() {
         OrderTestUtils.println(OrderTest4.class, &quot;@BeforeClass setUpClass&quot;);
@@ -1170,8 +1168,7 @@ public class OrderTest4 {
  
     private void println(String string) {
         OrderTestUtils.println(OrderTest4.class, string);
-    }
- 
+    } 
     @Before
     public void setUp() {
         this.println(&quot;@Before setUp&quot;);
@@ -1210,8 +1207,9 @@ OrderTest4 @Test test2()
 OrderTest4 @After setUp
 ExpensiveExternalResource after
 OrderTest4 @AfterClass tearDownClass
-The ExternalResource before method is called just before the @Before setUp method.
 ```
+
+The ExternalResource before method is called just before the @Before setUp method.
 
 The ExternalResource after method is called just before the @After setUp method.
 
