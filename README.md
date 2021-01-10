@@ -768,23 +768,29 @@ Here's a complete example:
 
 ```java
 public void test() throws Exception {
-  // Create a MockWebServer. These are lean enough that you can create a new
+
+  // Create a MockWebServer. These are lean enough that you can create a new  
   // instance for every unit test.
+  
   MockWebServer server = new MockWebServer();
 
   // Schedule some responses.
+  
   server.enqueue(new MockResponse().setBody("hello, world!"));
   server.enqueue(new MockResponse().setBody("sup, bra?"));
   server.enqueue(new MockResponse().setBody("yo dog"));
 
   // Start the server.
+  
   server.start();
 
   // Ask the server for its URL. You'll need this to make HTTP requests.
+  
   HttpUrl baseUrl = server.url("/v1/chat/");
 
   // Exercise your application code, which should make those HTTP requests.
   // Responses are returned in the same order that they are enqueued.
+  
   Chat chat = new Chat(baseUrl);
 
   chat.loadMore();
@@ -798,6 +804,7 @@ public void test() throws Exception {
       + "yo dog", chat.messages());
 
   // Optional: confirm that your app made the HTTP requests you were expecting.
+  
   RecordedRequest request1 = server.takeRequest();
   assertEquals("/v1/chat/messages/", request1.getPath());
   assertNotNull(request1.getHeader("Authorization"));
@@ -809,6 +816,7 @@ public void test() throws Exception {
   assertEquals("/v1/chat/messages/3", request3.getPath());
 
   // Shut down the server. Instances cannot be reused.
+  
   server.shutdown();
 }
 ```
@@ -830,7 +838,7 @@ MockResponse response = new MockResponse()
     
 MockResponse can be used to simulate a slow network. This is useful for testing timeouts and interactive testing.
 
-``´java 
+```java 
 response.throttleBody(1024, 1, TimeUnit.SECONDS);
 RecordedRequest
 ```
@@ -847,7 +855,7 @@ assertEquals("{}", request.getBody().readUtf8());
 
 By default MockWebServer uses a queue to specify a series of responses. Use a Dispatcher to handle requests using another policy. One natural policy is to dispatch on the request path. You can, for example, filter the request instead of using server.enqueue().
 
-``´java 
+```java 
 final Dispatcher dispatcher = new Dispatcher() {
 
     @Override
