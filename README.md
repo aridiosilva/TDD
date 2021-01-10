@@ -745,7 +745,7 @@ DAMP and DRY are not contradictory, rather they balance two different aspects of
  
      - While both are equally important, with a little wisdom you can tip the balance in your favor.
      
-## Test fixtures
+# Test fixtures
 
 *(based on JUnit Fixtures - Pat Hawks Jun 17, 2017) *
 
@@ -843,7 +843,34 @@ Will Output something like the following:
 @After tearDown
 @AfterClass tearDownClass
 ```
-     
+
+Example of folder containing test fixtures of the java Project in Eclipse 2020-12
+
+![](https://github.com/aridiosilva/TDD/blob/main/example_of_project_folder_containing_fixtures001.jpg)
+
+In the followinf json code we have an example of the *current_message_multi_device.json fixtures file contents:
+
+```JSON
+{
+    "messages" : [{
+        "type" : 1,
+        "destinationDeviceId" : 1,
+        "destinationRegistrationId" : 222,
+        "body" : "Zm9vYmFyego",
+        "timestamp" : 1234
+    },
+    {
+        "type" : 1,
+        "destinationDeviceId" : 2,
+        "destinationRegistrationId" : 333,
+        "body" : "Zm9vYmFyego",
+        "timestamp" : 1234
+    }]
+}
+```
+
+ 
+ 
 ## Design for Testability Patterns
   
 Almost every piece of code depends on some other classes, objects, modules, or procedures. To unit-test a piece of code properly, we would like to isolate the code from its dependencies. This isolation is difficult to achieve if those dependencies are hard-coded in the form of literal classnames. As presented in the Book of Gerard Maszeros titled "xUnit Test Patterns: Refactoring Test Code", pubished in 2007 with 948 pages, there are four patterns to deal with this problem and area ways to provide a means to substitute a depended-on component (DOC) to make it easy to use a Test Double(mock, etc.) while testing our code:
