@@ -879,12 +879,12 @@ This sessiona explains how to control code execution of unit tests and where @Cl
 
 The terminology used is:
 
-* A test implements @Test
-* A test case in a class with @Test methods
+* A *test* implements *@Test*
+* A *test case* in a *class* with *@Test methods*
 
 ### Ordering test methods
 
-The simplest test case you can write in JUnit is to annotate methods with @Test:
+The *simplest test case* you can write in *JUnit( is to *annotate methods* with *@Test*:
 
 ```java 
 package test;
@@ -905,7 +905,7 @@ public class OrderTest1 {
 }
 ```
 
-In OrderTest1, the execution order is:
+In *OrderTest1*, the *execution order* is:
 
 ``´java
 OrderTest1 @Test test1()
@@ -923,16 +923,19 @@ Call @Before setUp
 Call one @Test method
 ```
 
-If that data needs to be cleaned up, implement an @After tearDown method. The tearDown method is called after each @Test method.
+If that data needs to be cleaned up, implement an *@After tearDown method*. The *tearDown method* is called after each *@Test method*.
 
-One test invocation becomes the following call sequence:
+One *test invocation* becomes the following *call sequence*:
 
 ```java 
 Call @Before setUp
 Call one @Test method
 Call @After tearDown
+```
+
 The call sequence for a class with two test methods is:
 
+```java
 Call @Before setUp
 Call @Test method test1
 Call @After tearDown
