@@ -1217,8 +1217,9 @@ The ExternalResource after method is called just before the @After setUp method.
 
 An ExternalResource is a nice way to abstract out and resuse your resource management code. You can now compose use of your resources instead of  subclassing.
 
-Managing expensive resources with rules
-Just like you can wrap a test case with @BeforeClass and @AfterClass, there was no way to do this with rules until JUnit 4.9 and the ClassRule annotation.
+### Managing expensive resources with rules
+
+Just like you can wrap a *test case* with *@BeforeClass* and *@AfterClass*, there was no way to do this with *rules* until *JUnit 4.9* and the *ClassRule annotation*.
 
 The following examples shows a ClassRule at work. Deltas from the previous example are highlighted.
 
@@ -1261,20 +1262,17 @@ public class OrderTest5 {
         @Override
         public void close() throws IOException {
         }
-    }
- 
+    } 
     static class ManagedResource implements Closeable {
         @Override
         public void close() throws IOException {
         }
-    }
- 
+    } 
     @BeforeClass
     public static void setUpClass() {
         OrderTestUtils.println(OrderTest5.class, &quot;@BeforeClass setUpClass&quot;);
         MyExpensiveManagedResource = new ExpensiveManagedResource();
-    }
- 
+    } 
     @AfterClass
     public static void tearDownClass() throws IOException {
         OrderTestUtils.println(OrderTest5.class, &quot;@AfterClass tearDownClass&quot;);
