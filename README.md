@@ -1,4 +1,3 @@
-
 # TDD  - Test-Driven Development Technique
 
 The most important feature of software is its correctness, meaning that it does what it should do. So, the tests are essential part and interwined with the software development process, and development based on test is the exact way to achieve the correctness.
